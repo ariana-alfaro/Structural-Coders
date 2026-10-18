@@ -1,0 +1,2674 @@
+{
+  "format": "structural-coders-quiz",
+  "version": 1,
+  "quizzes": [
+    {
+      "id": "sc26-s1-practica",
+      "title": "Taller 1 · Python: primeros cimientos · Práctica",
+      "description": "Entrena a tu ritmo: diez preguntas originales del taller 1. Basado en: S1_SC_26-1.ipynb.",
+      "course": "Structural Coders · Taller 1",
+      "cycle": "2026-1",
+      "code": "S1PRAC",
+      "hints": true,
+      "practice": true,
+      "game": {
+        "enabled": true,
+        "timer": 0,
+        "speed": false,
+        "powerups": true,
+        "leaderboard": true
+      },
+      "questions": [
+        {
+          "type": "choice",
+          "title": "El tipo de una medición",
+          "brief": "¿Qué tipo devuelve esta conversión?",
+          "options": [
+            "int",
+            "bool",
+            "float",
+            "str"
+          ],
+          "solution": 2,
+          "explanation": "float convierte una cadena numérica a punto flotante.",
+          "code": "longitud = float(\"6.5\")\nprint(type(longitud).__name__)",
+          "id": 1,
+          "topic": "Python: primeros cimientos",
+          "points": 2
+        },
+        {
+          "type": "input",
+          "title": "Repartir sin decimales",
+          "brief": "Escribe la salida exacta, sin comillas ni texto adicional.",
+          "options": [],
+          "solution": "5",
+          "explanation": "La división entera redondea hacia abajo: 23 // 4 es 5.",
+          "code": "print(23 // 4)",
+          "id": 2,
+          "topic": "Python: primeros cimientos",
+          "points": 2
+        },
+        {
+          "type": "blank",
+          "title": "Una potencia para el área",
+          "brief": "Arrastra al hueco la pieza que completa el código.",
+          "options": [
+            "^",
+            "**",
+            "//",
+            "%"
+          ],
+          "solution": 1,
+          "explanation": "En Python ** es potencia; ^ corresponde a XOR de bits.",
+          "code": "lado = 6\narea = lado ___ 2",
+          "id": 3,
+          "topic": "Python: primeros cimientos",
+          "points": 2
+        },
+        {
+          "type": "order",
+          "title": "La primera sección",
+          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría.",
+          "options": [
+            "base = 4",
+            "altura = base - 1",
+            "area = base * altura",
+            "print(area)"
+          ],
+          "solution": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "explanation": "Las variables deben existir antes del cálculo y del print. Base y altura se definen en ese orden para este reto.",
+          "code": "",
+          "id": 4,
+          "topic": "Python: primeros cimientos",
+          "points": 2
+        },
+        {
+          "type": "boolean",
+          "title": "Una lista que crece",
+          "brief": "Una lista permite agregar elementos con append después de crearla.",
+          "options": [
+            "Verdadero",
+            "Falso"
+          ],
+          "solution": 0,
+          "explanation": "Las listas son mutables y append añade un elemento al final.",
+          "code": "",
+          "id": 5,
+          "topic": "Python: primeros cimientos",
+          "points": 2
+        },
+        {
+          "type": "choice",
+          "title": "La última etiqueta",
+          "brief": "¿Qué elemento se obtiene?",
+          "options": [
+            "IndexError",
+            "V-101",
+            "V-102",
+            "V-103"
+          ],
+          "solution": 3,
+          "explanation": "El índice -1 selecciona el último elemento.",
+          "code": "vigas = [\"V-101\", \"V-102\", \"V-103\"]\nprint(vigas[-1])",
+          "id": 6,
+          "topic": "Python: primeros cimientos",
+          "points": 2
+        },
+        {
+          "type": "input",
+          "title": "Limpiar una entrada",
+          "brief": "Escribe la salida exacta, sin comillas ni texto adicional.",
+          "options": [],
+          "solution": "gadest",
+          "explanation": "strip elimina espacios exteriores y lower pasa a minúsculas.",
+          "code": "print(\"  GADEST  \".strip().lower())",
+          "id": 7,
+          "topic": "Python: primeros cimientos",
+          "points": 2
+        },
+        {
+          "type": "blank",
+          "title": "Leer sin KeyError",
+          "brief": "Arrastra al hueco la pieza que completa el código.",
+          "options": [
+            "append",
+            "get",
+            "keys",
+            "popitem"
+          ],
+          "solution": 1,
+          "explanation": "get permite indicar un valor por defecto si falta la clave.",
+          "code": "material = {\"nombre\": \"Acero\"}\nprint(material.___(\"fy\", 420))",
+          "id": 8,
+          "topic": "Python: primeros cimientos",
+          "points": 2
+        },
+        {
+          "type": "order",
+          "title": "Intercambio de luces",
+          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría.",
+          "options": [
+            "a, b = 4, 7",
+            "a, b = b, a",
+            "mayor = a",
+            "print(mayor)"
+          ],
+          "solution": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "explanation": "Primero se definen a y b, luego se intercambian; mayor queda en 7.",
+          "code": "",
+          "id": 9,
+          "topic": "Python: primeros cimientos",
+          "points": 2
+        },
+        {
+          "type": "choice",
+          "title": "Colección sin duplicados",
+          "brief": "Quieres guardar códigos únicos sin exigir un orden. ¿Qué estructura eliges?",
+          "options": [
+            "str",
+            "list",
+            "tuple",
+            "set"
+          ],
+          "solution": 3,
+          "explanation": "Un set representa una colección de elementos únicos.",
+          "code": "",
+          "id": 10,
+          "topic": "Python: primeros cimientos",
+          "points": 2
+        }
+      ],
+      "updatedAt": "2026-10-18T12:00:00.000Z"
+    },
+    {
+      "id": "sc26-s1-vivo",
+      "title": "Taller 1 · Python: primeros cimientos · En vivo",
+      "description": "Comparte el reto con tu grupo: diez preguntas originales del taller 1. Basado en: S1_SC_26-1.ipynb.",
+      "course": "Structural Coders · Taller 1",
+      "cycle": "2026-1",
+      "code": "S1VIVO",
+      "hints": true,
+      "practice": true,
+      "game": {
+        "enabled": false,
+        "timer": 0,
+        "speed": false,
+        "powerups": true,
+        "leaderboard": true
+      },
+      "questions": [
+        {
+          "type": "input",
+          "title": "El residuo del reparto",
+          "brief": "Escribe la salida exacta, sin comillas ni texto adicional.",
+          "options": [],
+          "solution": "5",
+          "explanation": "29 = 6 × 4 + 5; el módulo entrega el residuo.",
+          "code": "print(29 % 6)",
+          "id": 1,
+          "topic": "Python: primeros cimientos",
+          "points": 2
+        },
+        {
+          "type": "choice",
+          "title": "Una cadena no es un número",
+          "brief": "¿Qué imprime la consola?",
+          "options": [
+            "12",
+            "3",
+            "TypeError",
+            "111"
+          ],
+          "solution": 0,
+          "explanation": "El operador + concatena dos cadenas.",
+          "code": "print(\"1\" + \"2\")",
+          "id": 2,
+          "topic": "Python: primeros cimientos",
+          "points": 2
+        },
+        {
+          "type": "blank",
+          "title": "Corte de un registro",
+          "brief": "Arrastra al hueco la pieza que completa el código.",
+          "options": [
+            "1",
+            "3",
+            "-4",
+            "0"
+          ],
+          "solution": 1,
+          "explanation": "El límite superior no se incluye: índices 1 y 2 producen [20, 30].",
+          "code": "codigos = [10, 20, 30, 40]\nprint(codigos[1:___])",
+          "id": 3,
+          "topic": "Python: primeros cimientos",
+          "points": 2
+        },
+        {
+          "type": "order",
+          "title": "Copiar antes de cambiar",
+          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría.",
+          "options": [
+            "original = [2, 4]",
+            "copia = original.copy()",
+            "copia.append(6)",
+            "print(original)"
+          ],
+          "solution": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "explanation": "La copia superficial basta para esta lista de enteros: original conserva [2, 4].",
+          "code": "",
+          "id": 4,
+          "topic": "Python: primeros cimientos",
+          "points": 2
+        },
+        {
+          "type": "boolean",
+          "title": "Tupla de coordenadas",
+          "brief": "Puedes sustituir una coordenada de una tupla mediante punto[0] = 8.",
+          "options": [
+            "Verdadero",
+            "Falso"
+          ],
+          "solution": 1,
+          "explanation": "Las tuplas no admiten asignación a sus posiciones.",
+          "code": "",
+          "id": 5,
+          "topic": "Python: primeros cimientos",
+          "points": 2
+        },
+        {
+          "type": "choice",
+          "title": "Verdad en una colección",
+          "brief": "¿Cuál expresión produce False?",
+          "options": [
+            "bool([0])",
+            "bool(\"0\")",
+            "bool([])",
+            "bool(-1)"
+          ],
+          "solution": 2,
+          "explanation": "La lista vacía es falsa; una lista no vacía, una cadena no vacía y -1 son verdaderos.",
+          "code": "",
+          "id": 6,
+          "topic": "Python: primeros cimientos",
+          "points": 2
+        },
+        {
+          "type": "input",
+          "title": "Mostrar solo lo necesario",
+          "brief": "Escribe la salida exacta, sin comillas ni texto adicional.",
+          "options": [],
+          "solution": "3.14",
+          "explanation": "El formato .2f muestra dos cifras decimales.",
+          "code": "valor = 3.14159\nprint(f\"{valor:.2f}\")",
+          "id": 7,
+          "topic": "Python: primeros cimientos",
+          "points": 2
+        },
+        {
+          "type": "blank",
+          "title": "Dos condiciones simultáneas",
+          "brief": "Arrastra al hueco la pieza que completa el código.",
+          "options": [
+            "in",
+            "is",
+            "and",
+            "or not"
+          ],
+          "solution": 2,
+          "explanation": "and exige que ambas comparaciones sean verdaderas.",
+          "code": "luz = 6\nprint(luz > 3 ___ luz < 8)",
+          "id": 8,
+          "topic": "Python: primeros cimientos",
+          "points": 2
+        },
+        {
+          "type": "order",
+          "title": "Acumular una carga",
+          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría.",
+          "options": [
+            "carga = 10",
+            "carga += 5",
+            "carga *= 2",
+            "print(carga)"
+          ],
+          "solution": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "explanation": "Tras sumar 5 y multiplicar por 2, carga vale 30.",
+          "code": "",
+          "id": 9,
+          "topic": "Python: primeros cimientos",
+          "points": 2
+        },
+        {
+          "type": "choice",
+          "title": "Una copia con objetos internos",
+          "brief": "¿Qué herramienta evita compartir listas anidadas con el original?",
+          "options": [
+            "list.reverse",
+            "str.copy",
+            "copy.deepcopy",
+            "dict.keys"
+          ],
+          "solution": 2,
+          "explanation": "deepcopy copia recursivamente los objetos internos; copy superficial los comparte.",
+          "code": "",
+          "id": 10,
+          "topic": "Python: primeros cimientos",
+          "points": 2
+        }
+      ],
+      "updatedAt": "2026-10-18T12:00:00.000Z"
+    },
+    {
+      "id": "sc26-s2-practica",
+      "title": "Taller 2 · Markdown, flujo y funciones · Práctica",
+      "description": "Entrena a tu ritmo: diez preguntas originales del taller 2. Basado en: S2_T1_SC_26-1.ipynb, S2_T2_SC_26-1.ipynb.",
+      "course": "Structural Coders · Taller 2",
+      "cycle": "2026-1",
+      "code": "S2PRAC",
+      "hints": true,
+      "practice": true,
+      "game": {
+        "enabled": true,
+        "timer": 0,
+        "speed": false,
+        "powerups": true,
+        "leaderboard": true
+      },
+      "questions": [
+        {
+          "type": "choice",
+          "title": "Una memoria legible",
+          "brief": "¿Cómo escribes un encabezado de segundo nivel en Markdown?",
+          "options": [
+            "< Geometría",
+            "## Geometría",
+            "** Geometría",
+            "// Geometría"
+          ],
+          "solution": 1,
+          "explanation": "Dos signos # seguidos de un espacio crean un encabezado de nivel 2.",
+          "code": "",
+          "id": 1,
+          "topic": "Markdown, flujo y funciones",
+          "points": 2
+        },
+        {
+          "type": "input",
+          "title": "Un límite que no entra",
+          "brief": "Escribe la salida exacta, sin comillas ni texto adicional.",
+          "options": [],
+          "solution": "[2, 4, 6]",
+          "explanation": "range incluye el inicio y excluye el límite final.",
+          "code": "print(list(range(2, 8, 2)))",
+          "id": 2,
+          "topic": "Markdown, flujo y funciones",
+          "points": 2
+        },
+        {
+          "type": "blank",
+          "title": "La función devuelve",
+          "brief": "Arrastra al hueco la pieza que completa el código.",
+          "options": [
+            "return",
+            "yield from",
+            "break",
+            "print"
+          ],
+          "solution": 0,
+          "explanation": "return entrega el resultado al código que llamó la función.",
+          "code": "def area(b, h):\n    ___ b * h",
+          "id": 3,
+          "topic": "Markdown, flujo y funciones",
+          "points": 2
+        },
+        {
+          "type": "order",
+          "title": "Definir y después usar",
+          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría.",
+          "options": [
+            "def doble(x):",
+            "    return 2 * x",
+            "carga = doble(15)",
+            "print(carga)"
+          ],
+          "solution": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "explanation": "La definición y su cuerpo van antes de la llamada; la salida es 30.",
+          "code": "",
+          "id": 4,
+          "topic": "Markdown, flujo y funciones",
+          "points": 2
+        },
+        {
+          "type": "boolean",
+          "title": "Negrita en la memoria",
+          "brief": "En Markdown, **Carga muerta** representa texto en negrita.",
+          "options": [
+            "Verdadero",
+            "Falso"
+          ],
+          "solution": 0,
+          "explanation": "Los pares de dos asteriscos delimitan negrita.",
+          "code": "",
+          "id": 5,
+          "topic": "Markdown, flujo y funciones",
+          "points": 2
+        },
+        {
+          "type": "choice",
+          "title": "Una ruta con nombre",
+          "brief": "¿Cuál es un enlace Markdown válido?",
+          "options": [
+            "(GADEST)[https://example.org]",
+            "[GADEST](https://example.org)",
+            "{GADEST}(https://example.org)",
+            "<GADEST|https://example.org>"
+          ],
+          "solution": 1,
+          "explanation": "Primero va el texto entre corchetes y luego la dirección entre paréntesis.",
+          "code": "",
+          "id": 6,
+          "topic": "Markdown, flujo y funciones",
+          "points": 2
+        },
+        {
+          "type": "input",
+          "title": "Un valor predeterminado",
+          "brief": "Escribe la salida exacta, sin comillas ni texto adicional.",
+          "options": [],
+          "solution": "25",
+          "explanation": "Al omitir n se usa el valor 2, por lo que 5² = 25.",
+          "code": "def potencia(x, n=2):\n    return x ** n\nprint(potencia(5))",
+          "id": 7,
+          "topic": "Markdown, flujo y funciones",
+          "points": 2
+        },
+        {
+          "type": "blank",
+          "title": "Filtrar las cargas pares",
+          "brief": "Arrastra al hueco la pieza que completa el código.",
+          "options": [
+            "if",
+            "while",
+            "else",
+            "for"
+          ],
+          "solution": 0,
+          "explanation": "La condición if al final filtra los elementos de la comprensión.",
+          "code": "pares = [x for x in range(1, 7) ___ x % 2 == 0]",
+          "id": 8,
+          "topic": "Markdown, flujo y funciones",
+          "points": 2
+        },
+        {
+          "type": "order",
+          "title": "Una lectura que puede fallar",
+          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría.",
+          "options": [
+            "try:",
+            "    luz = float(\"seis\")",
+            "except ValueError:",
+            "    luz = 0",
+            "print(luz)"
+          ],
+          "solution": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "explanation": "float falla con ValueError y el bloque except asigna 0.",
+          "code": "",
+          "id": 9,
+          "topic": "Markdown, flujo y funciones",
+          "points": 2
+        },
+        {
+          "type": "choice",
+          "title": "No terminar todavía",
+          "brief": "¿Qué instrucción salta a la siguiente iteración sin cerrar el bucle?",
+          "options": [
+            "return",
+            "continue",
+            "break",
+            "raise"
+          ],
+          "solution": 1,
+          "explanation": "continue omite el resto de la iteración actual; break finaliza el bucle.",
+          "code": "",
+          "id": 10,
+          "topic": "Markdown, flujo y funciones",
+          "points": 2
+        }
+      ],
+      "updatedAt": "2026-10-18T12:00:00.000Z"
+    },
+    {
+      "id": "sc26-s2-vivo",
+      "title": "Taller 2 · Markdown, flujo y funciones · En vivo",
+      "description": "Comparte el reto con tu grupo: diez preguntas originales del taller 2. Basado en: S2_T1_SC_26-1.ipynb, S2_T2_SC_26-1.ipynb.",
+      "course": "Structural Coders · Taller 2",
+      "cycle": "2026-1",
+      "code": "S2VIVO",
+      "hints": true,
+      "practice": true,
+      "game": {
+        "enabled": false,
+        "timer": 0,
+        "speed": false,
+        "powerups": true,
+        "leaderboard": true
+      },
+      "questions": [
+        {
+          "type": "input",
+          "title": "Suma flexible",
+          "brief": "Escribe la salida exacta, sin comillas ni texto adicional.",
+          "options": [],
+          "solution": "25",
+          "explanation": "*cargas recoge los argumentos posicionales y sum los acumula.",
+          "code": "def total(*cargas):\n    return sum(cargas)\nprint(total(8, 12, 5))",
+          "id": 1,
+          "topic": "Markdown, flujo y funciones",
+          "points": 2
+        },
+        {
+          "type": "choice",
+          "title": "Figura en el informe",
+          "brief": "¿Qué distingue una imagen de un enlace en Markdown?",
+          "options": [
+            "El sufijo #",
+            "El uso de //",
+            "La palabra image obligatoria",
+            "El prefijo !"
+          ],
+          "solution": 3,
+          "explanation": "La imagen usa ![texto alternativo](ruta), con ! al principio.",
+          "code": "",
+          "id": 2,
+          "topic": "Markdown, flujo y funciones",
+          "points": 2
+        },
+        {
+          "type": "blank",
+          "title": "Enumerar desde el primer piso",
+          "brief": "Arrastra al hueco la pieza que completa el código.",
+          "options": [
+            "enumerate",
+            "sorted",
+            "zip",
+            "range"
+          ],
+          "solution": 0,
+          "explanation": "enumerate entrega índice y valor; start=1 ajusta el inicio del contador.",
+          "code": "for numero, piso in ___([\"P1\", \"P2\"], start=1):\n    print(numero, piso)",
+          "id": 3,
+          "topic": "Markdown, flujo y funciones",
+          "points": 2
+        },
+        {
+          "type": "order",
+          "title": "Iterar con una condición",
+          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría.",
+          "options": [
+            "n = 1",
+            "while n < 3:",
+            "    n += 1",
+            "print(n)"
+          ],
+          "solution": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "explanation": "El while incrementa n hasta 3; el print debe quedar fuera del bucle.",
+          "code": "",
+          "id": 4,
+          "topic": "Markdown, flujo y funciones",
+          "points": 2
+        },
+        {
+          "type": "boolean",
+          "title": "El generador no es una lista",
+          "brief": "Una función con yield puede producir valores a demanda sin construir toda una lista.",
+          "options": [
+            "Verdadero",
+            "Falso"
+          ],
+          "solution": 0,
+          "explanation": "yield suspende la ejecución y permite continuar al pedir el siguiente valor.",
+          "code": "",
+          "id": 5,
+          "topic": "Markdown, flujo y funciones",
+          "points": 2
+        },
+        {
+          "type": "choice",
+          "title": "El parámetro por nombre",
+          "brief": "¿Qué recibe **datos dentro de una función?",
+          "options": [
+            "Una tupla de posicionales",
+            "Un diccionario de argumentos nombrados",
+            "Una lista de funciones",
+            "Una cadena"
+          ],
+          "solution": 1,
+          "explanation": "**kwargs recoge pares nombre-valor en un diccionario.",
+          "code": "",
+          "id": 6,
+          "topic": "Markdown, flujo y funciones",
+          "points": 2
+        },
+        {
+          "type": "input",
+          "title": "Una transformación breve",
+          "brief": "Escribe la salida exacta, sin comillas ni texto adicional.",
+          "options": [],
+          "solution": "18",
+          "explanation": "La lambda evalúa x * 2 para el argumento 9.",
+          "code": "doble = lambda x: x * 2\nprint(doble(9))",
+          "id": 7,
+          "topic": "Markdown, flujo y funciones",
+          "points": 2
+        },
+        {
+          "type": "blank",
+          "title": "Raíz con un módulo",
+          "brief": "Arrastra al hueco la pieza que completa el código.",
+          "options": [
+            "square",
+            "pow2",
+            "sqrt",
+            "root"
+          ],
+          "solution": 2,
+          "explanation": "math.sqrt calcula la raíz cuadrada y devuelve 9.0.",
+          "code": "import math\nprint(math.___(81))",
+          "id": 8,
+          "topic": "Markdown, flujo y funciones",
+          "points": 2
+        },
+        {
+          "type": "order",
+          "title": "Clasificar una nota",
+          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría.",
+          "options": [
+            "nota = 16",
+            "if nota >= 14:",
+            "    nivel = \"Logrado\"",
+            "else:",
+            "    nivel = \"En proceso\""
+          ],
+          "solution": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "explanation": "if y else deben acompañarse de sus bloques; 16 cumple la condición.",
+          "code": "",
+          "id": 9,
+          "topic": "Markdown, flujo y funciones",
+          "points": 2
+        },
+        {
+          "type": "choice",
+          "title": "Atrapar el problema correcto",
+          "brief": "¿Qué excepción corresponde a dividir un número por cero?",
+          "options": [
+            "ZeroDivisionError",
+            "ImportError",
+            "IndexError",
+            "KeyError"
+          ],
+          "solution": 0,
+          "explanation": "La división por cero lanza ZeroDivisionError.",
+          "code": "",
+          "id": 10,
+          "topic": "Markdown, flujo y funciones",
+          "points": 2
+        }
+      ],
+      "updatedAt": "2026-10-18T12:00:00.000Z"
+    },
+    {
+      "id": "sc26-s3-practica",
+      "title": "Taller 3 · Datos y gráficos estructurales · Práctica",
+      "description": "Entrena a tu ritmo: diez preguntas originales del taller 3. Basado en: S3_Numpy_Matplotlib_Pandas.ipynb.",
+      "course": "Structural Coders · Taller 3",
+      "cycle": "2026-1",
+      "code": "S3PRAC",
+      "hints": true,
+      "practice": true,
+      "game": {
+        "enabled": true,
+        "timer": 0,
+        "speed": false,
+        "powerups": true,
+        "leaderboard": true
+      },
+      "questions": [
+        {
+          "type": "choice",
+          "title": "Vectorizar una carga",
+          "brief": "Con import numpy as np, ¿qué crea un array numérico?",
+          "options": [
+            "np.array([10, 20])",
+            "np.frame(10, 20)",
+            "np.list(10, 20)",
+            "np.table([10, 20])"
+          ],
+          "solution": 0,
+          "explanation": "np.array construye un ndarray a partir de una lista.",
+          "code": "",
+          "id": 1,
+          "topic": "Datos y gráficos estructurales",
+          "points": 2
+        },
+        {
+          "type": "input",
+          "title": "La forma de la matriz",
+          "brief": "Escribe la salida exacta, sin comillas ni texto adicional.",
+          "options": [],
+          "solution": "(2, 3)",
+          "explanation": "La forma indica dos filas y tres columnas.",
+          "code": "import numpy as np\nprint(np.zeros((2, 3)).shape)",
+          "id": 2,
+          "topic": "Datos y gráficos estructurales",
+          "points": 2
+        },
+        {
+          "type": "blank",
+          "title": "De fuerzas a esfuerzos",
+          "brief": "Arrastra al hueco la pieza que completa el código.",
+          "options": [
+            "// 100 +",
+            "and",
+            "@",
+            "/"
+          ],
+          "solution": 3,
+          "explanation": "La división de un array por un escalar se aplica a cada elemento.",
+          "code": "import numpy as np\nP = np.array([100, 200])\nsigma = P ___ 0.02",
+          "id": 3,
+          "topic": "Datos y gráficos estructurales",
+          "points": 2
+        },
+        {
+          "type": "order",
+          "title": "Una curva con ejes",
+          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría.",
+          "options": [
+            "import matplotlib.pyplot as plt",
+            "fig, ax = plt.subplots()",
+            "ax.plot([0, 1], [0, 2])",
+            "ax.set_xlabel(\"x (m)\")",
+            "plt.show()"
+          ],
+          "solution": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "explanation": "Importa, crea los ejes, añade datos, etiqueta y muestra la figura.",
+          "code": "",
+          "id": 4,
+          "topic": "Datos y gráficos estructurales",
+          "points": 2
+        },
+        {
+          "type": "boolean",
+          "title": "Puntos independientes",
+          "brief": "Un gráfico scatter es adecuado para comparar pares de mediciones sin unirlos obligatoriamente.",
+          "options": [
+            "Verdadero",
+            "Falso"
+          ],
+          "solution": 0,
+          "explanation": "scatter representa pares de valores como puntos.",
+          "code": "",
+          "id": 5,
+          "topic": "Datos y gráficos estructurales",
+          "points": 2
+        },
+        {
+          "type": "choice",
+          "title": "Resolver sin invertir",
+          "brief": "¿Qué llamada resuelve K @ u = F para una K cuadrada no singular?",
+          "options": [
+            "np.mean(K, F)",
+            "np.linspace(K, F)",
+            "np.zeros(K, F)",
+            "np.linalg.solve(K, F)"
+          ],
+          "solution": 3,
+          "explanation": "solve obtiene la solución del sistema sin escribir una inversa explícita.",
+          "code": "",
+          "id": 6,
+          "topic": "Datos y gráficos estructurales",
+          "points": 2
+        },
+        {
+          "type": "input",
+          "title": "Carga total por fila",
+          "brief": "Escribe la salida exacta, sin comillas ni texto adicional.",
+          "options": [],
+          "solution": "[5, 9]",
+          "explanation": "axis=1 reduce las columnas de cada fila: 2+3 y 4+5.",
+          "code": "import numpy as np\na = np.array([[2, 3], [4, 5]])\nprint(a.sum(axis=1).tolist())",
+          "id": 7,
+          "topic": "Datos y gráficos estructurales",
+          "points": 2
+        },
+        {
+          "type": "blank",
+          "title": "Seleccionar columnas",
+          "brief": "Arrastra al hueco la pieza que completa el código.",
+          "options": [
+            "\"Z\"",
+            "\"L\"",
+            "\"P\"",
+            "0"
+          ],
+          "solution": 2,
+          "explanation": "df[\"P\"] selecciona la serie de cargas cuya suma es 30.",
+          "code": "import pandas as pd\ndf = pd.DataFrame({\"P\": [10, 20], \"L\": [3, 4]})\nprint(df[___].sum())",
+          "id": 8,
+          "topic": "Datos y gráficos estructurales",
+          "points": 2
+        },
+        {
+          "type": "order",
+          "title": "Una tabla de esfuerzos",
+          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría.",
+          "options": [
+            "import pandas as pd",
+            "df = pd.DataFrame({\"P\": [100], \"A\": [2]})",
+            "df[\"sigma\"] = df[\"P\"] / df[\"A\"]",
+            "print(df[\"sigma\"].iloc[0])"
+          ],
+          "solution": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "explanation": "Primero se crea la tabla; luego se calcula la columna derivada y se consulta.",
+          "code": "",
+          "id": 9,
+          "topic": "Datos y gráficos estructurales",
+          "points": 2
+        },
+        {
+          "type": "choice",
+          "title": "Guardar una figura",
+          "brief": "¿Qué método guarda fig como un archivo PNG?",
+          "options": [
+            "fig.save(\"curva.png\")",
+            "fig.savefig(\"curva.png\")",
+            "fig.export_excel(\"curva.png\")",
+            "fig.to_csv(\"curva.png\")"
+          ],
+          "solution": 1,
+          "explanation": "savefig exporta una figura a PNG y otros formatos admitidos.",
+          "code": "",
+          "id": 10,
+          "topic": "Datos y gráficos estructurales",
+          "points": 2
+        }
+      ],
+      "updatedAt": "2026-10-18T12:00:00.000Z"
+    },
+    {
+      "id": "sc26-s3-vivo",
+      "title": "Taller 3 · Datos y gráficos estructurales · En vivo",
+      "description": "Comparte el reto con tu grupo: diez preguntas originales del taller 3. Basado en: S3_Numpy_Matplotlib_Pandas.ipynb.",
+      "course": "Structural Coders · Taller 3",
+      "cycle": "2026-1",
+      "code": "S3VIVO",
+      "hints": true,
+      "practice": true,
+      "game": {
+        "enabled": false,
+        "timer": 0,
+        "speed": false,
+        "powerups": true,
+        "leaderboard": true
+      },
+      "questions": [
+        {
+          "type": "input",
+          "title": "Un rango equiespaciado",
+          "brief": "Escribe la salida exacta, sin comillas ni texto adicional.",
+          "options": [],
+          "solution": "[0.0, 2.0, 4.0, 6.0]",
+          "explanation": "Cuatro puntos igualmente espaciados incluyen ambos extremos por defecto.",
+          "code": "import numpy as np\nprint(np.linspace(0, 6, 4).tolist())",
+          "id": 1,
+          "topic": "Datos y gráficos estructurales",
+          "points": 2
+        },
+        {
+          "type": "choice",
+          "title": "Etiquetas o posiciones",
+          "brief": "¿Qué acceso de Pandas utiliza posiciones enteras?",
+          "options": [
+            ".label",
+            ".name",
+            ".loc",
+            ".iloc"
+          ],
+          "solution": 3,
+          "explanation": "iloc usa posiciones; loc usa etiquetas.",
+          "code": "",
+          "id": 2,
+          "topic": "Datos y gráficos estructurales",
+          "points": 2
+        },
+        {
+          "type": "blank",
+          "title": "El producto de matrices",
+          "brief": "Arrastra al hueco la pieza que completa el código.",
+          "options": [
+            "//",
+            "*",
+            "@",
+            "%"
+          ],
+          "solution": 2,
+          "explanation": "@ realiza el producto matricial; * opera elemento a elemento.",
+          "code": "import numpy as np\nA = np.eye(2)\nB = np.array([[1, 2], [3, 4]])\nC = A ___ B",
+          "id": 3,
+          "topic": "Datos y gráficos estructurales",
+          "points": 2
+        },
+        {
+          "type": "order",
+          "title": "Exportar un resumen",
+          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría.",
+          "options": [
+            "import pandas as pd",
+            "df = pd.DataFrame({\"Piso\": [1, 1, 2], \"P\": [2, 3, 4]})",
+            "resumen = df.groupby(\"Piso\")[\"P\"].sum()",
+            "resumen.to_csv(\"cargas.csv\")"
+          ],
+          "solution": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "explanation": "Se construye la tabla, se agrupa por piso, se suma y se exporta.",
+          "code": "",
+          "id": 4,
+          "topic": "Datos y gráficos estructurales",
+          "points": 2
+        },
+        {
+          "type": "boolean",
+          "title": "Filas y columnas transpuestas",
+          "brief": "Para un array de forma (2, 4), su transpuesta .T tiene forma (4, 2).",
+          "options": [
+            "Verdadero",
+            "Falso"
+          ],
+          "solution": 0,
+          "explanation": "La transposición intercambia los ejes de un array bidimensional.",
+          "code": "",
+          "id": 5,
+          "topic": "Datos y gráficos estructurales",
+          "points": 2
+        },
+        {
+          "type": "choice",
+          "title": "Un filtro de demanda",
+          "brief": "¿Qué selecciona df[df[\"Pu\"] > 500]?",
+          "options": [
+            "Filas con Pu menor que 500",
+            "Las primeras 500 filas",
+            "Solo la columna Pu",
+            "Filas con Pu mayor que 500"
+          ],
+          "solution": 3,
+          "explanation": "La condición produce una máscara booleana que filtra las filas.",
+          "code": "",
+          "id": 6,
+          "topic": "Datos y gráficos estructurales",
+          "points": 2
+        },
+        {
+          "type": "input",
+          "title": "El valor medio",
+          "brief": "Escribe la salida exacta, sin comillas ni texto adicional.",
+          "options": [],
+          "solution": "30.0",
+          "explanation": "La media es la suma 90 dividida entre tres observaciones.",
+          "code": "import numpy as np\nprint(float(np.mean([20, 30, 40])))",
+          "id": 7,
+          "topic": "Datos y gráficos estructurales",
+          "points": 2
+        },
+        {
+          "type": "blank",
+          "title": "Barras para los pisos",
+          "brief": "Arrastra al hueco la pieza que completa el código.",
+          "options": [
+            "scatter3d",
+            "bar",
+            "histogram",
+            "tableplot"
+          ],
+          "solution": 1,
+          "explanation": "bar dibuja barras verticales para comparar categorías.",
+          "code": "import matplotlib.pyplot as plt\nfig, ax = plt.subplots()\nax.___([\"P1\", \"P2\"], [80, 60])",
+          "id": 8,
+          "topic": "Datos y gráficos estructurales",
+          "points": 2
+        },
+        {
+          "type": "order",
+          "title": "Preparar una máscara numérica",
+          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría.",
+          "options": [
+            "import numpy as np",
+            "cargas = np.array([10, 30, 50])",
+            "mascara = cargas > 20",
+            "mayores = cargas[mascara]",
+            "print(mayores.tolist())"
+          ],
+          "solution": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "explanation": "La comparación produce la máscara usada después para obtener [30, 50].",
+          "code": "",
+          "id": 9,
+          "topic": "Datos y gráficos estructurales",
+          "points": 2
+        },
+        {
+          "type": "choice",
+          "title": "Un dato ausente",
+          "brief": "¿Qué método rellena valores faltantes con cero en una serie?",
+          "options": [
+            ".astype_missing(0)",
+            ".empty(0)",
+            ".fillna(0)",
+            ".drop_duplicates(0)"
+          ],
+          "solution": 2,
+          "explanation": "fillna sustituye valores ausentes; que cero sea apropiado depende del contexto.",
+          "code": "",
+          "id": 10,
+          "topic": "Datos y gráficos estructurales",
+          "points": 2
+        }
+      ],
+      "updatedAt": "2026-10-18T12:00:00.000Z"
+    },
+    {
+      "id": "sc26-s4-practica",
+      "title": "Taller 4 · Objetos que representan estructuras · Práctica",
+      "description": "Entrena a tu ritmo: diez preguntas originales del taller 4. Basado en: S4_POO.ipynb, S4_POO_Complemento.ipynb.",
+      "course": "Structural Coders · Taller 4",
+      "cycle": "2026-1",
+      "code": "S4PRAC",
+      "hints": true,
+      "practice": true,
+      "game": {
+        "enabled": true,
+        "timer": 0,
+        "speed": false,
+        "powerups": true,
+        "leaderboard": true
+      },
+      "questions": [
+        {
+          "type": "choice",
+          "title": "Plantilla y ejemplar",
+          "brief": "En Viga(6, 25), ¿qué representa Viga si es una clase?",
+          "options": [
+            "Una plantilla para crear objetos",
+            "Una propiedad de solo lectura",
+            "Una excepción",
+            "Un archivo CSV"
+          ],
+          "solution": 0,
+          "explanation": "La clase define la estructura y el comportamiento de sus instancias.",
+          "code": "",
+          "id": 1,
+          "topic": "Objetos que representan estructuras",
+          "points": 2
+        },
+        {
+          "type": "input",
+          "title": "Un atributo propio",
+          "brief": "Escribe la salida exacta, sin comillas ni texto adicional.",
+          "options": [],
+          "solution": "7",
+          "explanation": "El constructor guarda el argumento en el atributo x de esa instancia.",
+          "code": "class Nodo:\n    def __init__(self, x):\n        self.x = x\nn = Nodo(7)\nprint(n.x)",
+          "id": 2,
+          "topic": "Objetos que representan estructuras",
+          "points": 2
+        },
+        {
+          "type": "blank",
+          "title": "El área es comportamiento",
+          "brief": "Arrastra al hueco la pieza que completa el código.",
+          "options": [
+            "super",
+            "cls",
+            "self",
+            "Rectangulo()"
+          ],
+          "solution": 2,
+          "explanation": "self referencia la instancia y permite acceder a sus atributos.",
+          "code": "class Rectangulo:\n    def area(self):\n        return ___.b * self.h",
+          "id": 3,
+          "topic": "Objetos que representan estructuras",
+          "points": 2
+        },
+        {
+          "type": "order",
+          "title": "Crear una sección y calcular",
+          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría.",
+          "options": [
+            "class Seccion:",
+            "    def area(self):",
+            "        return 3 * 4",
+            "s = Seccion()",
+            "print(s.area())"
+          ],
+          "solution": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "explanation": "El método debe pertenecer a la clase y la instancia se crea antes de usarlo.",
+          "code": "",
+          "id": 4,
+          "topic": "Objetos que representan estructuras",
+          "points": 2
+        },
+        {
+          "type": "boolean",
+          "title": "Objetos independientes",
+          "brief": "Dos instancias pueden tener valores diferentes para un mismo atributo de instancia.",
+          "options": [
+            "Verdadero",
+            "Falso"
+          ],
+          "solution": 0,
+          "explanation": "Cada objeto conserva sus propios atributos, salvo que se comparta un objeto explícitamente.",
+          "code": "",
+          "id": 5,
+          "topic": "Objetos que representan estructuras",
+          "points": 2
+        },
+        {
+          "type": "choice",
+          "title": "Cerrar la puerta al dato inválido",
+          "brief": "¿Dónde encaja la validación de fc antes de asignarla mediante una propiedad?",
+          "options": [
+            "En __str__ obligatoriamente",
+            "En el nombre del archivo",
+            "En @fc.setter",
+            "Solo en print"
+          ],
+          "solution": 2,
+          "explanation": "El setter controla las asignaciones y puede rechazar valores no positivos.",
+          "code": "",
+          "id": 6,
+          "topic": "Objetos que representan estructuras",
+          "points": 2
+        },
+        {
+          "type": "input",
+          "title": "Reacción de una viga simple",
+          "brief": "Escribe la salida exacta, sin comillas ni texto adicional.",
+          "options": [],
+          "solution": "60.0",
+          "explanation": "Con carga uniforme, la reacción por apoyo es wL/2 en este modelo.",
+          "code": "class Viga:\n    def reaccion(self):\n        return self.w * self.L / 2\nv = Viga()\nv.w, v.L = 20, 6\nprint(v.reaccion())",
+          "id": 7,
+          "topic": "Objetos que representan estructuras",
+          "points": 2
+        },
+        {
+          "type": "blank",
+          "title": "Reutilizar el constructor padre",
+          "brief": "Arrastra al hueco la pieza que completa el código.",
+          "options": [
+            "self",
+            "super",
+            "parentclass",
+            "cls"
+          ],
+          "solution": 1,
+          "explanation": "super() permite delegar en la implementación de la clase base.",
+          "code": "class Acero(Material):\n    def __init__(self):\n        ___().__init__(\"Acero\", 200000)",
+          "id": 8,
+          "topic": "Objetos que representan estructuras",
+          "points": 2
+        },
+        {
+          "type": "order",
+          "title": "Una clase de datos",
+          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría.",
+          "options": [
+            "from dataclasses import dataclass",
+            "@dataclass",
+            "class Punto:",
+            "    x: float",
+            "p = Punto(2.5)"
+          ],
+          "solution": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "explanation": "El decorador dataclass debe aparecer inmediatamente antes de la clase.",
+          "code": "",
+          "id": 9,
+          "topic": "Objetos que representan estructuras",
+          "points": 2
+        },
+        {
+          "type": "choice",
+          "title": "Construir con otros objetos",
+          "brief": "Una Viga guarda una Seccion y un Material como atributos. ¿Qué relación ejemplifica?",
+          "options": [
+            "Indexación negativa",
+            "Recursión obligatoria",
+            "Composición",
+            "Conversión a entero"
+          ],
+          "solution": 2,
+          "explanation": "La composición permite formar un objeto con otros objetos colaboradores.",
+          "code": "",
+          "id": 10,
+          "topic": "Objetos que representan estructuras",
+          "points": 2
+        }
+      ],
+      "updatedAt": "2026-10-18T12:00:00.000Z"
+    },
+    {
+      "id": "sc26-s4-vivo",
+      "title": "Taller 4 · Objetos que representan estructuras · En vivo",
+      "description": "Comparte el reto con tu grupo: diez preguntas originales del taller 4. Basado en: S4_POO.ipynb, S4_POO_Complemento.ipynb.",
+      "course": "Structural Coders · Taller 4",
+      "cycle": "2026-1",
+      "code": "S4VIVO",
+      "hints": true,
+      "practice": true,
+      "game": {
+        "enabled": false,
+        "timer": 0,
+        "speed": false,
+        "powerups": true,
+        "leaderboard": true
+      },
+      "questions": [
+        {
+          "type": "input",
+          "title": "Un cálculo común",
+          "brief": "Escribe la salida exacta, sin comillas ni texto adicional.",
+          "options": [],
+          "solution": "31",
+          "explanation": "Ambos objetos responden a area(); 16 + 15 = 31, ejemplo de polimorfismo.",
+          "code": "class Cuadrado:\n    def area(self):\n        return 4 * 4\nclass Rectangulo:\n    def area(self):\n        return 3 * 5\nprint(sum(s.area() for s in [Cuadrado(), Rectangulo()]))",
+          "id": 1,
+          "topic": "Objetos que representan estructuras",
+          "points": 2
+        },
+        {
+          "type": "choice",
+          "title": "La propiedad se consulta",
+          "brief": "Con @property sobre def area(self), ¿cómo se lee desde s?",
+          "options": [
+            "s.get.property",
+            "s.area",
+            "s.area()",
+            "property(s)"
+          ],
+          "solution": 1,
+          "explanation": "Una property se consulta como atributo, aunque su valor se calcule con un método.",
+          "code": "",
+          "id": 2,
+          "topic": "Objetos que representan estructuras",
+          "points": 2
+        },
+        {
+          "type": "blank",
+          "title": "Una lista por sistema",
+          "brief": "Arrastra al hueco la pieza que completa el código.",
+          "options": [
+            "default",
+            "default_factory",
+            "init_value",
+            "shared"
+          ],
+          "solution": 1,
+          "explanation": "default_factory crea una lista nueva para cada instancia.",
+          "code": "from dataclasses import dataclass, field\n@dataclass\nclass Sistema:\n    vigas: list = field(___=list)",
+          "id": 3,
+          "topic": "Objetos que representan estructuras",
+          "points": 2
+        },
+        {
+          "type": "order",
+          "title": "Un catálogo de tipos",
+          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría.",
+          "options": [
+            "from enum import Enum",
+            "class MaterialTipo(Enum):",
+            "    ACERO = \"acero\"",
+            "tipo = MaterialTipo.ACERO",
+            "print(tipo.value)"
+          ],
+          "solution": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "explanation": "Enum declara miembros con nombres; .value recupera el valor asociado.",
+          "code": "",
+          "id": 4,
+          "topic": "Objetos que representan estructuras",
+          "points": 2
+        },
+        {
+          "type": "boolean",
+          "title": "Un resultado que no se reasigna",
+          "brief": "@dataclass(frozen=True) impide la reasignación normal de los campos de la instancia.",
+          "options": [
+            "Verdadero",
+            "Falso"
+          ],
+          "solution": 0,
+          "explanation": "frozen=True genera restricciones de asignación; no hace profundamente inmutables todos los objetos contenidos.",
+          "code": "",
+          "id": 5,
+          "topic": "Objetos que representan estructuras",
+          "points": 2
+        },
+        {
+          "type": "choice",
+          "title": "Una clase, una tarea",
+          "brief": "¿Qué diseño sigue mejor la responsabilidad única?",
+          "options": [
+            "Cada clase depende de cada botón",
+            "Una clase calcula, dibuja, autentica y envía correos",
+            "Una clase Seccion calcula sus propiedades geométricas",
+            "Todo se guarda en variables globales"
+          ],
+          "solution": 2,
+          "explanation": "Una responsabilidad clara reduce acoplamiento y facilita las pruebas.",
+          "code": "",
+          "id": 6,
+          "topic": "Objetos que representan estructuras",
+          "points": 2
+        },
+        {
+          "type": "input",
+          "title": "Elegir la mayor demanda",
+          "brief": "Escribe la salida exacta, sin comillas ni texto adicional.",
+          "options": [],
+          "solution": "V2",
+          "explanation": "La clave compara el segundo elemento de cada tupla; 120 es el máximo.",
+          "code": "demandas = [(\"V1\", 80), (\"V2\", 120), (\"V3\", 95)]\nprint(max(demandas, key=lambda v: v[1])[0])",
+          "id": 7,
+          "topic": "Objetos que representan estructuras",
+          "points": 2
+        },
+        {
+          "type": "blank",
+          "title": "Validación antes del guardado",
+          "brief": "Arrastra al hueco la pieza que completa el código.",
+          "options": [
+            "raise",
+            "except",
+            "yield from",
+            "return from"
+          ],
+          "solution": 0,
+          "explanation": "raise interrumpe la operación y comunica un dato inválido.",
+          "code": "def validar(fc):\n    if fc <= 0:\n        ___ ValueError(\"fc debe ser positiva\")",
+          "id": 8,
+          "topic": "Objetos que representan estructuras",
+          "points": 2
+        },
+        {
+          "type": "order",
+          "title": "Guardar una viga en el sistema",
+          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría.",
+          "options": [
+            "class Sistema:",
+            "    def __init__(self):",
+            "        self.vigas = []",
+            "s = Sistema()",
+            "s.vigas.append(\"V-101\")"
+          ],
+          "solution": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "explanation": "Se define e inicializa la colección antes de agregar una viga.",
+          "code": "",
+          "id": 9,
+          "topic": "Objetos que representan estructuras",
+          "points": 2
+        },
+        {
+          "type": "choice",
+          "title": "Herencia con significado",
+          "brief": "¿Cuál relación describe mejor una herencia razonable?",
+          "options": [
+            "Seccion es un ArchivoCSV",
+            "Concreto es un Material",
+            "Viga es una ListaDeUsuarios",
+            "Material es una Ventana"
+          ],
+          "solution": 1,
+          "explanation": "La herencia expresa una relación es-un entre el subtipo y el tipo base.",
+          "code": "",
+          "id": 10,
+          "topic": "Objetos que representan estructuras",
+          "points": 2
+        }
+      ],
+      "updatedAt": "2026-10-18T12:00:00.000Z"
+    },
+    {
+      "id": "sc26-s5-practica",
+      "title": "Taller 5 · Automatización con la API de SAP2000 · Práctica",
+      "description": "Entrena a tu ritmo: diez preguntas originales del taller 5. Basado en: S5_API_SAP2000.ipynb.",
+      "course": "Structural Coders · Taller 5",
+      "cycle": "2026-1",
+      "code": "S5PRAC",
+      "hints": true,
+      "practice": true,
+      "game": {
+        "enabled": true,
+        "timer": 0,
+        "speed": false,
+        "powerups": true,
+        "leaderboard": true
+      },
+      "questions": [
+        {
+          "type": "choice",
+          "title": "El puente hacia SAP2000",
+          "brief": "En el enfoque del cuaderno, ¿qué tecnología conecta Python con SAP2000?",
+          "options": [
+            "Markdown",
+            "Tkinter exclusivamente",
+            "COM",
+            "HTML"
+          ],
+          "solution": 2,
+          "explanation": "El material usa la interfaz COM y comtypes para controlar SAP2000 en Windows.",
+          "code": "",
+          "id": 1,
+          "topic": "Automatización con la API de SAP2000",
+          "points": 2
+        },
+        {
+          "type": "input",
+          "title": "Una carga combinada del ejemplo",
+          "brief": "Escribe la salida exacta, sin comillas ni texto adicional.",
+          "options": [],
+          "solution": "24.2",
+          "explanation": "Se aplica la combinación usada como ejemplo en el notebook: 14 + 10.2. No es una recomendación normativa universal.",
+          "code": "CM, CV = 10, 6\nprint(1.4 * CM + 1.7 * CV)",
+          "id": 2,
+          "topic": "Automatización con la API de SAP2000",
+          "points": 2
+        },
+        {
+          "type": "blank",
+          "title": "Importar la conexión COM",
+          "brief": "Arrastra al hueco la pieza que completa el código.",
+          "options": [
+            "matplotlib",
+            "comtypes",
+            "pandas",
+            "tkinter"
+          ],
+          "solution": 1,
+          "explanation": "comtypes.client permite crear u obtener objetos COM.",
+          "code": "import ___.client",
+          "id": 3,
+          "topic": "Automatización con la API de SAP2000",
+          "points": 2
+        },
+        {
+          "type": "order",
+          "title": "Del modelo al resultado",
+          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría.",
+          "options": [
+            "pasos = []",
+            "pasos.append(\"Definir materiales y secciones\")",
+            "pasos.append(\"Crear geometría y cargas\")",
+            "pasos.append(\"Ejecutar análisis\")",
+            "print(pasos)"
+          ],
+          "solution": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "explanation": "Materiales y secciones preceden a sus asignaciones; el análisis requiere el modelo y sus cargas.",
+          "code": "",
+          "id": 4,
+          "topic": "Automatización con la API de SAP2000",
+          "points": 2
+        },
+        {
+          "type": "boolean",
+          "title": "Hay un programa detrás",
+          "brief": "El enfoque COM del cuaderno requiere SAP2000 instalado en el equipo que ejecuta la automatización.",
+          "options": [
+            "Verdadero",
+            "Falso"
+          ],
+          "solution": 0,
+          "explanation": "El script controla la aplicación instalada; no sustituye su motor de análisis.",
+          "code": "",
+          "id": 5,
+          "topic": "Automatización con la API de SAP2000",
+          "points": 2
+        },
+        {
+          "type": "choice",
+          "title": "La responsabilidad de la conexión",
+          "brief": "¿Qué tarea corresponde a ConexionSAP2000?",
+          "options": [
+            "Modificar las notas del taller",
+            "Dibujar un histograma de ensayos",
+            "Abrir o enlazar la aplicación y obtener el modelo",
+            "Diseñar todas las secciones sin datos"
+          ],
+          "solution": 2,
+          "explanation": "La conexión administra el enlace con la aplicación; las otras clases se ocupan de modelar, analizar y reportar.",
+          "code": "",
+          "id": 6,
+          "topic": "Automatización con la API de SAP2000",
+          "points": 2
+        },
+        {
+          "type": "input",
+          "title": "Altura acumulada",
+          "brief": "Escribe la salida exacta, sin comillas ni texto adicional.",
+          "options": [],
+          "solution": "6.5",
+          "explanation": "La cota del segundo nivel se obtiene sumando las alturas entre pisos.",
+          "code": "h1, h2 = 3.5, 3.0\nprint(h1 + h2)",
+          "id": 7,
+          "topic": "Automatización con la API de SAP2000",
+          "points": 2
+        },
+        {
+          "type": "blank",
+          "title": "La instrucción de análisis",
+          "brief": "Arrastra al hueco la pieza que completa el código.",
+          "options": [
+            "StartExcel",
+            "PlotFrame",
+            "DrawNotebook",
+            "RunAnalysis"
+          ],
+          "solution": 3,
+          "explanation": "Analyze.RunAnalysis() ejecuta el análisis del modelo mediante la API.",
+          "code": "ret = modelo.Analyze.___()",
+          "id": 8,
+          "topic": "Automatización con la API de SAP2000",
+          "points": 2
+        },
+        {
+          "type": "order",
+          "title": "Tratar un código de retorno",
+          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría.",
+          "options": [
+            "ret = 0",
+            "if ret != 0:",
+            "    raise RuntimeError(\"Falló la operación\")",
+            "estado = \"Operación completada\"",
+            "print(estado)"
+          ],
+          "solution": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "explanation": "En este ejemplo, solo se informa éxito si el retorno es cero.",
+          "code": "",
+          "id": 9,
+          "topic": "Automatización con la API de SAP2000",
+          "points": 2
+        },
+        {
+          "type": "choice",
+          "title": "Antes de confiar en los resultados",
+          "brief": "¿Qué comprobación es necesaria tras llamar a una operación de la API?",
+          "options": [
+            "Convertir todo a cadenas",
+            "Ignorar siempre el retorno",
+            "Verificar el código de retorno y la validez de las salidas",
+            "Cambiar el nombre del notebook"
+          ],
+          "solution": 2,
+          "explanation": "Una llamada puede fallar o devolver datos vacíos; comprobarlos evita informes engañosos.",
+          "code": "",
+          "id": 10,
+          "topic": "Automatización con la API de SAP2000",
+          "points": 2
+        }
+      ],
+      "updatedAt": "2026-10-18T12:00:00.000Z"
+    },
+    {
+      "id": "sc26-s5-vivo",
+      "title": "Taller 5 · Automatización con la API de SAP2000 · En vivo",
+      "description": "Comparte el reto con tu grupo: diez preguntas originales del taller 5. Basado en: S5_API_SAP2000.ipynb.",
+      "course": "Structural Coders · Taller 5",
+      "cycle": "2026-1",
+      "code": "S5VIVO",
+      "hints": true,
+      "practice": true,
+      "game": {
+        "enabled": false,
+        "timer": 0,
+        "speed": false,
+        "powerups": true,
+        "leaderboard": true
+      },
+      "questions": [
+        {
+          "type": "input",
+          "title": "Un vano más",
+          "brief": "Escribe la salida exacta, sin comillas ni texto adicional.",
+          "options": [],
+          "solution": "15",
+          "explanation": "Tres vanos de cinco metros suman quince metros de longitud total.",
+          "code": "vanos, luz = 3, 5\nprint(vanos * luz)",
+          "id": 1,
+          "topic": "Automatización con la API de SAP2000",
+          "points": 2
+        },
+        {
+          "type": "choice",
+          "title": "Unidades consistentes",
+          "brief": "Antes de asignar geometría y cargas, ¿qué decisión debes fijar?",
+          "options": [
+            "Solo el color de la ventana",
+            "El sistema de unidades utilizado por el modelo",
+            "El orden alfabético del reporte",
+            "El apodo del participante"
+          ],
+          "solution": 1,
+          "explanation": "Longitudes, fuerzas y propiedades deben ser coherentes con las unidades del modelo.",
+          "code": "",
+          "id": 2,
+          "topic": "Automatización con la API de SAP2000",
+          "points": 2
+        },
+        {
+          "type": "blank",
+          "title": "Organizar la tabla extraída",
+          "brief": "Arrastra al hueco la pieza que completa el código.",
+          "options": [
+            "Figure",
+            "Window",
+            "ArrayFrame",
+            "DataFrame"
+          ],
+          "solution": 3,
+          "explanation": "Un DataFrame organiza columnas de resultados para filtrarlas y exportarlas.",
+          "code": "import pandas as pd\nresultados = pd.___({\"Elemento\": [\"V1\"], \"M3\": [80]})",
+          "id": 3,
+          "topic": "Automatización con la API de SAP2000",
+          "points": 2
+        },
+        {
+          "type": "order",
+          "title": "Preparar un reporte de fuerzas",
+          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría.",
+          "options": [
+            "import pandas as pd",
+            "df = pd.DataFrame({\"M3\": [12, 25]})",
+            "maximo = df[\"M3\"].max()",
+            "reporte = f\"M3 máximo: {maximo}\"",
+            "print(reporte)"
+          ],
+          "solution": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "explanation": "La tabla existe antes del cálculo del máximo y la construcción del texto.",
+          "code": "",
+          "id": 4,
+          "topic": "Automatización con la API de SAP2000",
+          "points": 2
+        },
+        {
+          "type": "boolean",
+          "title": "Analizar no equivale a dibujar",
+          "brief": "La clase encargada de generar reportes debería crear automáticamente materiales y apoyos como responsabilidad principal.",
+          "options": [
+            "Verdadero",
+            "Falso"
+          ],
+          "solution": 1,
+          "explanation": "En el enfoque del taller, el reporte organiza resultados; el modelado pertenece a otras clases.",
+          "code": "",
+          "id": 5,
+          "topic": "Automatización con la API de SAP2000",
+          "points": 2
+        },
+        {
+          "type": "choice",
+          "title": "Una fuerza en su sitio",
+          "brief": "Según la tabla de resultados del cuaderno, ¿qué familia consulta fuerzas en elementos frame?",
+          "options": [
+            "Results.FrameForce",
+            "Results.JointDispl",
+            "PropMaterial.SetMaterial",
+            "File.Save"
+          ],
+          "solution": 0,
+          "explanation": "FrameForce extrae fuerzas internas de elementos frame; JointDispl obtiene desplazamientos nodales.",
+          "code": "",
+          "id": 6,
+          "topic": "Automatización con la API de SAP2000",
+          "points": 2
+        },
+        {
+          "type": "input",
+          "title": "Encontrar la demanda absoluta",
+          "brief": "Escribe la salida exacta, sin comillas ni texto adicional.",
+          "options": [],
+          "solution": "70",
+          "explanation": "La mayor magnitud es 70; usar solo max(momentos) daría 60.",
+          "code": "momentos = [-45, 30, -70, 60]\nprint(max(abs(m) for m in momentos))",
+          "id": 7,
+          "topic": "Automatización con la API de SAP2000",
+          "points": 2
+        },
+        {
+          "type": "blank",
+          "title": "Poner nombre al modelo",
+          "brief": "Arrastra al hueco la pieza que completa el código.",
+          "options": [
+            "WriteMarkdown",
+            "RunAnalysis",
+            "Save",
+            "to_csv"
+          ],
+          "solution": 2,
+          "explanation": "File.Save guarda el modelo SAP2000 en la ruta indicada.",
+          "code": "ruta = \"portico.sdb\"\nret = modelo.File.___(ruta)",
+          "id": 8,
+          "topic": "Automatización con la API de SAP2000",
+          "points": 2
+        },
+        {
+          "type": "order",
+          "title": "Guardar antes del análisis",
+          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría.",
+          "options": [
+            "modelo = conexion.modelo",
+            "ruta = \"portico.sdb\"",
+            "modelo.File.Save(ruta)",
+            "ret = modelo.Analyze.RunAnalysis()",
+            "print(ret)"
+          ],
+          "solution": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "explanation": "Tras obtener el modelo y una ruta, se guarda antes de analizar en este flujo.",
+          "code": "",
+          "id": 9,
+          "topic": "Automatización con la API de SAP2000",
+          "points": 2
+        },
+        {
+          "type": "choice",
+          "title": "Seleccionar el caso a consultar",
+          "brief": "¿Para qué se seleccionan los casos o combinaciones antes de extraer resultados?",
+          "options": [
+            "Para que la tabla corresponda a la carga que se desea estudiar",
+            "Para cambiar la versión de Python",
+            "Para eliminar todas las unidades",
+            "Para convertir vigas en nodos"
+          ],
+          "solution": 0,
+          "explanation": "La selección de salida determina a qué casos o combinaciones pertenecen los resultados consultados.",
+          "code": "",
+          "id": 10,
+          "topic": "Automatización con la API de SAP2000",
+          "points": 2
+        }
+      ],
+      "updatedAt": "2026-10-18T12:00:00.000Z"
+    },
+    {
+      "id": "sc26-s6-practica",
+      "title": "Taller 6 · Arquitectura e interfaces con Tkinter · Práctica",
+      "description": "Entrena a tu ritmo: diez preguntas originales del taller 6. Basado en: S6_Arquitectura.ipynb, S6_Tkinter.ipynb.",
+      "course": "Structural Coders · Taller 6",
+      "cycle": "2026-1",
+      "code": "S6PRAC",
+      "hints": true,
+      "practice": true,
+      "game": {
+        "enabled": true,
+        "timer": 0,
+        "speed": false,
+        "powerups": true,
+        "leaderboard": true
+      },
+      "questions": [
+        {
+          "type": "choice",
+          "title": "Separar el cálculo del botón",
+          "brief": "¿Dónde ubicarías una función reutilizable de cálculo de área?",
+          "options": [
+            "En un archivo de contraseñas",
+            "Solo dentro del texto del botón",
+            "En un módulo de cálculo independiente de Tkinter",
+            "En el color de la ventana"
+          ],
+          "solution": 2,
+          "explanation": "Separar cálculo e interfaz permite reutilizar y probar la lógica por separado.",
+          "code": "",
+          "id": 1,
+          "topic": "Arquitectura e interfaces con Tkinter",
+          "points": 2
+        },
+        {
+          "type": "input",
+          "title": "Leer y convertir una entrada",
+          "brief": "Escribe la salida exacta, sin comillas ni texto adicional.",
+          "options": [],
+          "solution": "13.0",
+          "explanation": "Las entradas de texto deben convertirse antes de realizar cálculos numéricos.",
+          "code": "texto = \"6.5\"\nluz = float(texto)\nprint(luz * 2)",
+          "id": 2,
+          "topic": "Arquitectura e interfaces con Tkinter",
+          "points": 2
+        },
+        {
+          "type": "blank",
+          "title": "Crear la ventana principal",
+          "brief": "Arrastra al hueco la pieza que completa el código.",
+          "options": [
+            "FrameGraph",
+            "AppFrame",
+            "Show",
+            "Tk"
+          ],
+          "solution": 3,
+          "explanation": "Tk() crea la ventana raíz de una aplicación Tkinter.",
+          "code": "import tkinter as tk\nventana = tk.___()",
+          "id": 3,
+          "topic": "Arquitectura e interfaces con Tkinter",
+          "points": 2
+        },
+        {
+          "type": "order",
+          "title": "Una interfaz mínima",
+          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría.",
+          "options": [
+            "import tkinter as tk",
+            "root = tk.Tk()",
+            "label = tk.Label(root, text=\"GADEST\")",
+            "label.pack()",
+            "root.mainloop()"
+          ],
+          "solution": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "explanation": "Se crea la raíz, el widget, se distribuye y se inicia el bucle de eventos.",
+          "code": "",
+          "id": 4,
+          "topic": "Arquitectura e interfaces con Tkinter",
+          "points": 2
+        },
+        {
+          "type": "boolean",
+          "title": "Esperar el clic",
+          "brief": "Al configurar Button(command=calcular), se pasa la función para que se ejecute cuando corresponda.",
+          "options": [
+            "Verdadero",
+            "Falso"
+          ],
+          "solution": 0,
+          "explanation": "Sin paréntesis se entrega la referencia; calcular() la ejecutaría durante la construcción.",
+          "code": "",
+          "id": 5,
+          "topic": "Arquitectura e interfaces con Tkinter",
+          "points": 2
+        },
+        {
+          "type": "choice",
+          "title": "Elegir una opción",
+          "brief": "¿Qué widget de ttk ofrece una lista desplegable?",
+          "options": [
+            "Combobox",
+            "Label",
+            "Canvas",
+            "Scrollbar exclusivamente"
+          ],
+          "solution": 0,
+          "explanation": "ttk.Combobox permite seleccionar entre opciones de una lista.",
+          "code": "",
+          "id": 6,
+          "topic": "Arquitectura e interfaces con Tkinter",
+          "points": 2
+        },
+        {
+          "type": "input",
+          "title": "Una fórmula sin interfaz",
+          "brief": "Escribe la salida exacta, sin comillas ni texto adicional.",
+          "options": [],
+          "solution": "20.0",
+          "explanation": "La función calcula wL²/8 y puede probarse sin abrir una ventana.",
+          "code": "def momento(w, L):\n    return w * L**2 / 8\nprint(momento(10, 4))",
+          "id": 7,
+          "topic": "Arquitectura e interfaces con Tkinter",
+          "points": 2
+        },
+        {
+          "type": "blank",
+          "title": "Leer el Entry",
+          "brief": "Arrastra al hueco la pieza que completa el código.",
+          "options": [
+            "mainloop",
+            "pack",
+            "read_csv",
+            "get"
+          ],
+          "solution": 3,
+          "explanation": "Entry.get() recupera la cadena escrita por el usuario.",
+          "code": "texto = entrada.___()",
+          "id": 8,
+          "topic": "Arquitectura e interfaces con Tkinter",
+          "points": 2
+        },
+        {
+          "type": "order",
+          "title": "Actualizar un resultado",
+          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría.",
+          "options": [
+            "texto = \"4\"",
+            "luz = float(texto)",
+            "reaccion = 10 * luz / 2",
+            "mensaje = f\"R = {reaccion:.1f} kN\"",
+            "print(mensaje)"
+          ],
+          "solution": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "explanation": "Primero se lee, luego se convierte, se calcula y se prepara la salida.",
+          "code": "",
+          "id": 9,
+          "topic": "Arquitectura e interfaces con Tkinter",
+          "points": 2
+        },
+        {
+          "type": "choice",
+          "title": "Ubicación en filas y columnas",
+          "brief": "¿Qué gestor sitúa widgets mediante row y column?",
+          "options": [
+            "grid",
+            "plot",
+            "place_csv",
+            "show"
+          ],
+          "solution": 0,
+          "explanation": "grid organiza widgets en una cuadrícula con filas y columnas.",
+          "code": "",
+          "id": 10,
+          "topic": "Arquitectura e interfaces con Tkinter",
+          "points": 2
+        }
+      ],
+      "updatedAt": "2026-10-18T12:00:00.000Z"
+    },
+    {
+      "id": "sc26-s6-vivo",
+      "title": "Taller 6 · Arquitectura e interfaces con Tkinter · En vivo",
+      "description": "Comparte el reto con tu grupo: diez preguntas originales del taller 6. Basado en: S6_Arquitectura.ipynb, S6_Tkinter.ipynb.",
+      "course": "Structural Coders · Taller 6",
+      "cycle": "2026-1",
+      "code": "S6VIVO",
+      "hints": true,
+      "practice": true,
+      "game": {
+        "enabled": false,
+        "timer": 0,
+        "speed": false,
+        "powerups": true,
+        "leaderboard": true
+      },
+      "questions": [
+        {
+          "type": "input",
+          "title": "Un resultado formateado",
+          "brief": "Escribe la salida exacta, sin comillas ni texto adicional.",
+          "options": [],
+          "solution": "0.180",
+          "explanation": "El formato .3f muestra tres posiciones decimales, incluso el cero final.",
+          "code": "area = 0.3 * 0.6\nprint(f\"{area:.3f}\")",
+          "id": 1,
+          "topic": "Arquitectura e interfaces con Tkinter",
+          "points": 2
+        },
+        {
+          "type": "choice",
+          "title": "Datos no numéricos",
+          "brief": "Si float(entrada.get()) falla por un texto como \"hola\", ¿qué excepción conviene manejar?",
+          "options": [
+            "FileNotFoundError",
+            "ImportError",
+            "StopIteration",
+            "ValueError"
+          ],
+          "solution": 3,
+          "explanation": "La cadena no tiene una representación numérica válida y float lanza ValueError.",
+          "code": "",
+          "id": 2,
+          "topic": "Arquitectura e interfaces con Tkinter",
+          "points": 2
+        },
+        {
+          "type": "blank",
+          "title": "Una variable vinculada",
+          "brief": "Arrastra al hueco la pieza que completa el código.",
+          "options": [
+            "TextValue",
+            "LabelVar",
+            "StringVar",
+            "StringFrame"
+          ],
+          "solution": 2,
+          "explanation": "StringVar almacena un valor de texto que puede vincularse a widgets.",
+          "code": "import tkinter as tk\nvalor = tk.___(value=\"Listo\")",
+          "id": 3,
+          "topic": "Arquitectura e interfaces con Tkinter",
+          "points": 2
+        },
+        {
+          "type": "order",
+          "title": "Validar una geometría",
+          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría.",
+          "options": [
+            "h = -2",
+            "if h <= 0:",
+            "    mensaje = \"Altura inválida\"",
+            "else:",
+            "    mensaje = \"Altura aceptada\""
+          ],
+          "solution": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "explanation": "Una geometría no positiva se rechaza antes de calcular con ella.",
+          "code": "",
+          "id": 4,
+          "topic": "Arquitectura e interfaces con Tkinter",
+          "points": 2
+        },
+        {
+          "type": "boolean",
+          "title": "Diseño de responsabilidades",
+          "brief": "Para comprobar una función de cálculo debería ser obligatorio abrir la ventana gráfica.",
+          "options": [
+            "Verdadero",
+            "Falso"
+          ],
+          "solution": 1,
+          "explanation": "Una lógica independiente de la interfaz se puede probar directamente.",
+          "code": "",
+          "id": 5,
+          "topic": "Arquitectura e interfaces con Tkinter",
+          "points": 2
+        },
+        {
+          "type": "choice",
+          "title": "Un aviso claro",
+          "brief": "¿Qué recurso de Tkinter se usa para mostrar una alerta de error?",
+          "options": [
+            "numpy.error_window",
+            "pandas.alert",
+            "plt.showerror",
+            "messagebox.showerror"
+          ],
+          "solution": 3,
+          "explanation": "messagebox proporciona cuadros de diálogo, incluidos los avisos de error.",
+          "code": "",
+          "id": 6,
+          "topic": "Arquitectura e interfaces con Tkinter",
+          "points": 2
+        },
+        {
+          "type": "input",
+          "title": "Un módulo con alias",
+          "brief": "Escribe la salida exacta, sin comillas ni texto adicional.",
+          "options": [],
+          "solution": "7.0",
+          "explanation": "El alias m sigue referenciando el módulo math; sqrt devuelve un float.",
+          "code": "import math as m\nprint(m.sqrt(49))",
+          "id": 7,
+          "topic": "Arquitectura e interfaces con Tkinter",
+          "points": 2
+        },
+        {
+          "type": "blank",
+          "title": "Pestañas para organizar",
+          "brief": "Arrastra al hueco la pieza que completa el código.",
+          "options": [
+            "WindowTabs",
+            "Notebook",
+            "DataFrame",
+            "Subplots"
+          ],
+          "solution": 1,
+          "explanation": "ttk.Notebook reúne páginas seleccionables mediante pestañas.",
+          "code": "from tkinter import ttk\npestanas = ttk.___(root)",
+          "id": 8,
+          "topic": "Arquitectura e interfaces con Tkinter",
+          "points": 2
+        },
+        {
+          "type": "order",
+          "title": "Incrustar una figura",
+          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría.",
+          "options": [
+            "from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg",
+            "canvas = FigureCanvasTkAgg(fig, master=root)",
+            "canvas.draw()",
+            "canvas.get_tk_widget().pack()"
+          ],
+          "solution": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "explanation": "Con fig y root ya creados, el adaptador dibuja la figura y coloca su widget en la ventana.",
+          "code": "",
+          "id": 9,
+          "topic": "Arquitectura e interfaces con Tkinter",
+          "points": 2
+        },
+        {
+          "type": "choice",
+          "title": "La ventana deja de responder",
+          "brief": "Un análisis largo corre dentro del callback principal. ¿Qué efecto puede tener?",
+          "options": [
+            "Acelerar siempre todos los botones",
+            "Guardar automáticamente un Excel",
+            "Eliminar la necesidad de mainloop",
+            "Bloquear temporalmente la atención a eventos de la interfaz"
+          ],
+          "solution": 3,
+          "explanation": "El bucle de eventos no puede atender la interfaz mientras el callback largo lo ocupa.",
+          "code": "",
+          "id": 10,
+          "topic": "Arquitectura e interfaces con Tkinter",
+          "points": 2
+        }
+      ],
+      "updatedAt": "2026-10-18T12:00:00.000Z"
+    },
+    {
+      "id": "sc26-s7-practica",
+      "title": "Taller 7 · Aplicaciones web con Streamlit · Práctica",
+      "description": "Entrena a tu ritmo: diez preguntas originales del taller 7. Basado en: S7_Streamlit.ipynb.",
+      "course": "Structural Coders · Taller 7",
+      "cycle": "2026-1",
+      "code": "S7PRAC",
+      "hints": true,
+      "practice": true,
+      "game": {
+        "enabled": true,
+        "timer": 0,
+        "speed": false,
+        "powerups": true,
+        "leaderboard": true
+      },
+      "questions": [
+        {
+          "type": "choice",
+          "title": "Llevar el script al navegador",
+          "brief": "¿Qué comando inicia una aplicación Streamlit llamada app.py?",
+          "options": [
+            "python notebook app.py",
+            "streamlit run app.py",
+            "pip run app.py",
+            "tkinter app.py"
+          ],
+          "solution": 1,
+          "explanation": "Streamlit inicia su servidor y ejecuta la aplicación con streamlit run.",
+          "code": "",
+          "id": 1,
+          "topic": "Aplicaciones web con Streamlit",
+          "points": 2
+        },
+        {
+          "type": "input",
+          "title": "El cálculo que alimenta la tarjeta",
+          "brief": "Escribe la salida exacta, sin comillas ni texto adicional.",
+          "options": [],
+          "solution": "112.5",
+          "explanation": "El momento del modelo simple es 25 × 36 / 8 = 112.5.",
+          "code": "w, L = 25, 6\nprint(f\"{w * L**2 / 8:.1f}\")",
+          "id": 2,
+          "topic": "Aplicaciones web con Streamlit",
+          "points": 2
+        },
+        {
+          "type": "blank",
+          "title": "Una entrada numérica directa",
+          "brief": "Arrastra al hueco la pieza que completa el código.",
+          "options": [
+            "StringVar",
+            "numeric_entry",
+            "number_input",
+            "Entry"
+          ],
+          "solution": 2,
+          "explanation": "number_input devuelve directamente un número, sin usar .get().",
+          "code": "import streamlit as st\nL = st.___(\"Luz\", min_value=1.0, value=6.0)",
+          "id": 3,
+          "topic": "Aplicaciones web con Streamlit",
+          "points": 2
+        },
+        {
+          "type": "order",
+          "title": "La primera app web",
+          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría.",
+          "options": [
+            "import streamlit as st",
+            "st.title(\"Mi primera viga\")",
+            "L = st.number_input(\"Luz\", min_value=1.0, value=6.0)",
+            "R = 10 * L / 2",
+            "st.metric(\"Reacción\", R)"
+          ],
+          "solution": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "explanation": "Importa, presenta, recoge la entrada, calcula y muestra la métrica.",
+          "code": "",
+          "id": 4,
+          "topic": "Aplicaciones web con Streamlit",
+          "points": 2
+        },
+        {
+          "type": "boolean",
+          "title": "El script vuelve a empezar",
+          "brief": "En el comportamiento habitual de Streamlit, cambiar un widget provoca una nueva ejecución del script.",
+          "options": [
+            "Verdadero",
+            "Falso"
+          ],
+          "solution": 0,
+          "explanation": "El modelo del taller se basa en reejecutar el script para actualizar la interfaz.",
+          "code": "",
+          "id": 5,
+          "topic": "Aplicaciones web con Streamlit",
+          "points": 2
+        },
+        {
+          "type": "choice",
+          "title": "Recordar las vigas agregadas",
+          "brief": "¿Qué herramienta conserva datos entre reejecuciones en una sesión?",
+          "options": [
+            "Una variable local reiniciada en cada ejecución",
+            "plt.show",
+            "tk.StringVar",
+            "st.session_state"
+          ],
+          "solution": 3,
+          "explanation": "session_state permite mantener valores ligados a la sesión del usuario.",
+          "code": "",
+          "id": 6,
+          "topic": "Aplicaciones web con Streamlit",
+          "points": 2
+        },
+        {
+          "type": "input",
+          "title": "Un dato inicial protegido",
+          "brief": "Escribe la salida exacta, sin comillas ni texto adicional.",
+          "options": [],
+          "solution": "1",
+          "explanation": "La inicialización solo ocurre si la clave falta; después se incrementa una vez.",
+          "code": "estado = {}\nif \"contador\" not in estado:\n    estado[\"contador\"] = 0\nestado[\"contador\"] += 1\nprint(estado[\"contador\"])",
+          "id": 7,
+          "topic": "Aplicaciones web con Streamlit",
+          "points": 2
+        },
+        {
+          "type": "blank",
+          "title": "La figura dentro de la página",
+          "brief": "Arrastra al hueco la pieza que completa el código.",
+          "options": [
+            "plot_window",
+            "pyplot",
+            "show_tk",
+            "mainloop"
+          ],
+          "solution": 1,
+          "explanation": "st.pyplot(fig) muestra una figura Matplotlib dentro de la aplicación.",
+          "code": "import streamlit as st\nst.___(fig)",
+          "id": 8,
+          "topic": "Aplicaciones web con Streamlit",
+          "points": 2
+        },
+        {
+          "type": "order",
+          "title": "Guardar un estado inicial",
+          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría.",
+          "options": [
+            "import streamlit as st",
+            "if \"vigas\" not in st.session_state:",
+            "    st.session_state.vigas = []",
+            "st.session_state.vigas.append(\"V1\")",
+            "st.write(st.session_state.vigas)"
+          ],
+          "solution": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "explanation": "Primero se comprueba e inicializa el estado y luego se usa la lista.",
+          "code": "",
+          "id": 9,
+          "topic": "Aplicaciones web con Streamlit",
+          "points": 2
+        },
+        {
+          "type": "choice",
+          "title": "Confirmar varios datos juntos",
+          "brief": "¿Qué componente agrupa entradas para enviarlas al pulsar un botón de confirmación?",
+          "options": [
+            "st.metric",
+            "st.latex",
+            "st.caption",
+            "st.form"
+          ],
+          "solution": 3,
+          "explanation": "Un formulario agrupa las interacciones hasta el envío del formulario.",
+          "code": "",
+          "id": 10,
+          "topic": "Aplicaciones web con Streamlit",
+          "points": 2
+        }
+      ],
+      "updatedAt": "2026-10-18T12:00:00.000Z"
+    },
+    {
+      "id": "sc26-s7-vivo",
+      "title": "Taller 7 · Aplicaciones web con Streamlit · En vivo",
+      "description": "Comparte el reto con tu grupo: diez preguntas originales del taller 7. Basado en: S7_Streamlit.ipynb.",
+      "course": "Structural Coders · Taller 7",
+      "cycle": "2026-1",
+      "code": "S7VIVO",
+      "hints": true,
+      "practice": true,
+      "game": {
+        "enabled": false,
+        "timer": 0,
+        "speed": false,
+        "powerups": true,
+        "leaderboard": true
+      },
+      "questions": [
+        {
+          "type": "input",
+          "title": "Tabla calculada para la web",
+          "brief": "Escribe la salida exacta, sin comillas ni texto adicional.",
+          "options": [],
+          "solution": "60.0",
+          "explanation": "La media que puede mostrarse con st.metric es 180 / 3.",
+          "code": "cargas = [40, 60, 80]\nprint(sum(cargas) / len(cargas))",
+          "id": 1,
+          "topic": "Aplicaciones web con Streamlit",
+          "points": 2
+        },
+        {
+          "type": "choice",
+          "title": "La tabla que sí se modifica",
+          "brief": "¿Qué función devuelve una tabla con las modificaciones introducidas por el usuario?",
+          "options": [
+            "st.image",
+            "st.code",
+            "st.data_editor",
+            "st.dataframe como editor de celdas"
+          ],
+          "solution": 2,
+          "explanation": "data_editor admite edición; dataframe se usa para mostrar y explorar la tabla.",
+          "code": "",
+          "id": 2,
+          "topic": "Aplicaciones web con Streamlit",
+          "points": 2
+        },
+        {
+          "type": "blank",
+          "title": "Elegir un material",
+          "brief": "Arrastra al hueco la pieza que completa el código.",
+          "options": [
+            "selectframe",
+            "selectbox",
+            "Combobox",
+            "choose_file"
+          ],
+          "solution": 1,
+          "explanation": "selectbox devuelve la opción elegida de una lista desplegable.",
+          "code": "import streamlit as st\nmaterial = st.___(\"Material\", [\"Acero\", \"Concreto\"])",
+          "id": 3,
+          "topic": "Aplicaciones web con Streamlit",
+          "points": 2
+        },
+        {
+          "type": "order",
+          "title": "Dividir una pantalla",
+          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría.",
+          "options": [
+            "import streamlit as st",
+            "izquierda, derecha = st.columns(2)",
+            "with izquierda:",
+            "    st.write(\"Datos de entrada\")",
+            "derecha.write(\"Resultados\")"
+          ],
+          "solution": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "explanation": "columns crea los contenedores; el bloque with coloca contenido en la izquierda.",
+          "code": "",
+          "id": 4,
+          "topic": "Aplicaciones web con Streamlit",
+          "points": 2
+        },
+        {
+          "type": "boolean",
+          "title": "Una contraseña no es código público",
+          "brief": "Los secretos de una app deben escribirse directamente en un repositorio público para que la nube pueda leerlos.",
+          "options": [
+            "Verdadero",
+            "Falso"
+          ],
+          "solution": 1,
+          "explanation": "El material separa secretos del código público y excluye secrets.toml del control de versiones.",
+          "code": "",
+          "id": 5,
+          "topic": "Aplicaciones web con Streamlit",
+          "points": 2
+        },
+        {
+          "type": "choice",
+          "title": "No repetir una lectura costosa",
+          "brief": "¿Qué decorador se propone para reutilizar resultados de lecturas o cálculos de datos con los mismos argumentos?",
+          "options": [
+            "@st.session_state",
+            "@st.columns",
+            "@st.cache_data",
+            "@st.title"
+          ],
+          "solution": 2,
+          "explanation": "cache_data almacena resultados de funciones de datos para evitar recalcularlos sin necesidad.",
+          "code": "",
+          "id": 6,
+          "topic": "Aplicaciones web con Streamlit",
+          "points": 2
+        },
+        {
+          "type": "input",
+          "title": "Una tabla descargable comienza aquí",
+          "brief": "Escribe la salida exacta, sin comillas ni texto adicional.",
+          "options": [],
+          "solution": "2",
+          "explanation": "Las dos filas pueden convertirse en datos para un botón de descarga.",
+          "code": "filas = [\"V1;80\", \"V2;95\"]\nprint(len(filas))",
+          "id": 7,
+          "topic": "Aplicaciones web con Streamlit",
+          "points": 2
+        },
+        {
+          "type": "blank",
+          "title": "Ofrecer el archivo al aspirante",
+          "brief": "Arrastra al hueco la pieza que completa el código.",
+          "options": [
+            "download_button",
+            "file_uploader",
+            "save_window",
+            "upload_button"
+          ],
+          "solution": 0,
+          "explanation": "download_button entrega un archivo; file_uploader recibe archivos del usuario.",
+          "code": "import streamlit as st\nst.___(\"Descargar CSV\", data=\"Viga;M\nV1;80\", file_name=\"vigas.csv\")",
+          "id": 8,
+          "topic": "Aplicaciones web con Streamlit",
+          "points": 2
+        },
+        {
+          "type": "order",
+          "title": "Navegación de varias páginas",
+          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría.",
+          "options": [
+            "import streamlit as st",
+            "paginas = [st.Page(\"inicio.py\", title=\"Inicio\")]",
+            "pagina = st.navigation(paginas)",
+            "pagina.run()"
+          ],
+          "solution": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "explanation": "Se describen las páginas, se crea la navegación y se ejecuta la página seleccionada.",
+          "code": "",
+          "id": 9,
+          "topic": "Aplicaciones web con Streamlit",
+          "points": 2
+        },
+        {
+          "type": "choice",
+          "title": "Reutilizar el motor de cálculo",
+          "brief": "¿Qué archivo debería funcionar sin importar Streamlit en el proyecto integrador?",
+          "options": [
+            "La página que crea todos los widgets",
+            "El archivo de secretos",
+            "calculos.py",
+            "El archivo del tema visual"
+          ],
+          "solution": 2,
+          "explanation": "calculos.py concentra el modelo y las fórmulas para reutilizarlos desde distintas interfaces.",
+          "code": "",
+          "id": 10,
+          "topic": "Aplicaciones web con Streamlit",
+          "points": 2
+        }
+      ],
+      "updatedAt": "2026-10-18T12:00:00.000Z"
+    }
+  ]
+}

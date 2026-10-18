@@ -1,3 +1,4 @@
+import {normalizeAvatar} from './avatars.mjs';
 // Modo práctica tipo Quizizz: recorrido individual con puntos de juego. No crea intentos académicos ni modifica notas.
 import {matchesAnswer} from './authoring-model.mjs';
 import {roundPoints} from './live-model.mjs';
@@ -38,4 +39,4 @@ export function advanceRun(run,total){const index=run.index+1;return {...run,ind
 // Posición del jugador frente a recorridos anteriores del mismo cuestionario, en el mismo punto del recorrido
 export function rankAt(records,run){const i=run.progress.length-1;const others=records.filter(r=>r.quizId===run.quizId&&r.revision===run.revision&&r.progress.length>i).map(r=>r.progress[i]);return {position:1+others.filter(s=>s>run.score).length,of:others.length+1}}
 export function leaderboard(records,quizId,revision){const best=new Map();for(const r of records)if(r.quizId===quizId&&r.revision===revision){const key=r.nick.toLocaleLowerCase(),old=best.get(key);if(!old||r.score>old.score)best.set(key,r)}return [...best.values()].sort((a,b)=>b.score-a.score||a.finished.localeCompare(b.finished))}
-export function recordOf(run,now=new Date()){return {quizId:run.quizId,revision:run.revision,nick:run.nick,score:run.score,correct:run.correct,best:run.best,progress:run.progress,finished:now.toISOString()}}
+export function recordOf(run,now=new Date()){return {quizId:run.quizId,revision:run.revision,nick:run.nick,avatar:normalizeAvatar(run.avatar),score:run.score,correct:run.correct,best:run.best,progress:run.progress,finished:now.toISOString()}}

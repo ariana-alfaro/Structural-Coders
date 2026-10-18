@@ -8,7 +8,7 @@
 .practicepowerlist{list-style:none;margin:6px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:8px}.practicepowerlist li{display:grid;grid-template-columns:auto 1fr;gap:2px 8px;align-items:center;background:#141a26;border:1px solid #2a3446;border-radius:10px;padding:10px 12px;font-size:12px;color:#c4cad9}.practicepowerlist li span{grid-column:2;color:#8590a8;font-size:11px}.practicepowerlist svg{color:#c4a8ff}
 
 .practicehud{display:flex;align-items:center;gap:10px;font-size:14px;color:#dfe6f2}
-.practicehud>span{display:inline-flex;align-items:center;gap:6px;background:#ffffff10;border-radius:999px;padding:7px 13px;font-weight:600}
+.practicehud>span:not(.sc-avatar){display:inline-flex;align-items:center;gap:6px;background:#ffffff10;border-radius:999px;padding:7px 13px;font-weight:600}
 .practicecount{margin-right:auto}.practicescore svg{color:#ffd166}.practicestreak svg{color:#ff9f5a}.practicestreak.hot{background:#ff7a3d33!important;color:#ffd3b8}
 .practicerank{font-family:'Space Grotesk';color:#c4a8ff}.practicerank small{color:#8590a8;font-weight:400}
 .practicetimer{position:relative;height:30px;border-radius:999px;background:#ffffff12;overflow:hidden}.practicetimer i{position:absolute;inset:0 auto 0 0;background:linear-gradient(90deg,#8b5cf6,#6bb8f1);transition:width .1s linear}
@@ -32,5 +32,5 @@
 .gamesettings>label:first-child{font-size:12px;color:#b3b8cb}.gamesettings select{display:block;margin-top:7px;background:#111623;color:#e9ebf4;border:1px solid #383e53;border-radius:7px;padding:10px;font:inherit;font-size:13px}
 .gamesettingsnote{margin:0;font-size:11px;color:#8590a8}
 .practicegamebtn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:10px;background:#2a1f4a;border:1px solid #6d4fc2;color:#e4d8ff;border-radius:7px;padding:12px;font-size:12px;font-weight:600}.practicegamebtn:hover:not(:disabled){background:#3a2b66}
-@media(max-width:800px){.practiceintro,.practicefinal,.practicefeedback,.practiceq{padding:18px}.practicepowerlist{grid-template-columns:1fr}.practicehud{font-size:13px;gap:6px}.practicehud>span{padding:6px 10px}}
+@media(max-width:800px){.practiceintro,.practicefinal,.practicefeedback,.practiceq{padding:18px}.practicepowerlist{grid-template-columns:1fr}.practicehud{font-size:13px;gap:6px}.practicehud>span:not(.sc-avatar){padding:6px 10px}}
 @media(prefers-reduced-motion:reduce){.practiceaward{animation:none}.practicetimer i{transition:none}}

@@ -1,3 +1,4 @@
+import {normalizeAvatar} from './avatars.mjs';
 // Partida en vivo: estado puro que mantiene la pantalla del docente. Las soluciones nunca salen de aquí antes de la revelación.
 import {matchesAnswer} from './authoring-model.mjs';
 export const MAX_PLAYERS=200;
@@ -6,16 +7,19 @@ export function cleanNick(name){return String(name??'').replace(/\s+/g,' ').trim
 export function publicQuestion(q){const {solution,explanation,...rest}=q;return rest}
 export function validValue(q,value){if(q.type==='input')return typeof value==='string'&&value.length<=80;if(q.type==='order')return Array.isArray(value)&&value.length===q.options.length&&value.every(n=>Number.isInteger(n)&&n>=0&&n<q.options.length)&&new Set(value).size===value.length;return Number.isInteger(value)&&value>=0&&value<q.options.length}
 export function roundPoints({correct,elapsed,limit,speed=true,weight=2,streak=1}){if(!correct)return 0;const t=Math.min(Math.max(elapsed,0),limit);const base=Math.round(1000*(weight/2)*(speed?1-t/limit/2:1));return base+Math.min(500,Math.max(0,streak-1)*100)}
-export function createGame(quiz,{limit=20,speed=true}={},rng){return {pin:makePin(rng),quiz,limit,speed,phase:'lobby',index:-1,startedAt:0,players:{},order:[],banned:[],answers:{},round:{}}}
-export function addPlayer(game,id,name){
+export function createGame(quiz,{limit=20,speed=true,requireUniversityCode=false}={},rng){return {id:globalThis.crypto.randomUUID(),pin:makePin(rng),quiz,limit,speed,requireUniversityCode,phase:'lobby',index:-1,startedAt:0,players:{},order:[],banned:[],answers:{},round:{}}}
+export function addPlayer(game,id,name,universityCode='',avatar){
  if(game.banned.includes(id))throw new Error('El docente te retiró de esta partida.');
  if(game.players[id])return game;
  const nick=cleanNick(name);
+ const studentCode=String(universityCode??'').trim().toUpperCase();
+ if(game.requireUniversityCode&&!/^[A-Z0-9-]{4,24}$/.test(studentCode))throw new Error('Ingresa tu codigo universitario (4 a 24 letras, numeros o guiones).');
+ if(studentCode&&Object.values(game.players).some(p=>p.universityCode===studentCode))throw new Error('Ese codigo universitario ya esta en la partida.');
  if(nick.length<2)throw new Error('Usa un apodo de 2 a 20 caracteres.');
  if(Object.values(game.players).some(p=>p.name.toLocaleLowerCase()===nick.toLocaleLowerCase()))throw new Error('Ese apodo ya está en uso. Elige otro.');
  if(game.order.length>=MAX_PLAYERS)throw new Error('La partida está llena.');
  if(game.phase==='podium')throw new Error('La partida ya terminó.');
- return {...game,players:{...game.players,[id]:{name:nick,score:0,streak:0,correct:0}},order:[...game.order,id]};
+ return {...game,players:{...game.players,[id]:{name:nick,universityCode:studentCode,avatar:normalizeAvatar(avatar),score:0,streak:0,correct:0}},order:[...game.order,id]};
 }
 export function removePlayer(game,id){const {[id]:_,...players}=game.players;const {[id]:__,...answers}=game.answers;return {...game,players,answers,order:game.order.filter(x=>x!==id),banned:[...game.banned,id]}}
 export function startQuestion(game,now){const index=game.index+1;if(index>=game.quiz.questions.length)return {...game,phase:'podium'};return {...game,phase:'question',index,startedAt:now,answers:{},round:{}}}
@@ -40,7 +44,7 @@ export function snapshot(game,now){
  return {pin:game.pin,phase:game.phase,title:game.quiz.title,total:game.quiz.questions.length,index:game.index,limit:game.limit,speed:game.speed,
   remaining:game.phase==='question'?Math.max(0,game.startedAt+game.limit*1000-now):0,
   question:q?publicQuestion(q):null,
-  players:standings(game).map(({id,name,score,correct,streak})=>({id,name,score,correct,streak})),
+  players:standings(game).map(({id,name,score,correct,streak,avatar})=>({id,name,score,correct,streak,avatar:normalizeAvatar(avatar)})),
   answered:Object.keys(game.answers),round:revealed?game.round:{},
   reveal:revealed&&q?{solution:q.solution,explanation:q.explanation,distribution:distribution(q,game.answers)}:null};
 }

@@ -211,3 +211,32 @@ Se recuperaron `CycleExport.tsx` y `cycle-excel.ts`. La exportación de ciclo co
 El QR de las salas ahora utiliza `VITE_PUBLIC_URL` cuando está configurada. Este ajuste no añade autenticación ni convierte la pestaña anfitriona en almacenamiento permanente.
 
 Verificación de esta reorganización: 42 pruebas automáticas pasan, incluidas las de Excel y los enlaces. En el navegador se verificaron ambos espacios, la biblioteca editable, la configuración de partidas y el recorrido completo de práctica de dos preguntas con 2100 puntos de juego. No se probó una nueva partida con teléfonos físicos ni autorización real de miembros.
+
+## Evaluación individual calificada en el servidor
+
+La evaluación individual ya no se califica en el navegador. Esto aplica al servidor local (`npm run dev:demo`, `npm start` o un túnel) y a la nube (Vercel + Supabase). El navegador recibe las preguntas **sin soluciones ni explicaciones**. El servidor:
+
+- abre cada pregunta y mide el tiempo con su propio reloj;
+- valida la secuencia y el formato de cada respuesta, califica y devuelve la explicación después de responder;
+- calcula la nota sobre 20 y guarda el intento.
+
+Las ayudas (descartar una alternativa) y las segundas oportunidades también se validan en el servidor. La práctica posterior no cambia la nota. Ninguna compilación (demo ni nube) incluye ya el motor de soluciones.
+
+- **Rutas:** `POST /api/eval/join|recover|question|submit|results|learning|hint|practice` (públicas, protegidas por un token por participación) y `GET /api/member/eval-results` (solo miembros, únicamente de los cuestionarios que pueden ver en su biblioteca).
+- **Identidad del intento:** el token se entrega una sola vez y solo se guarda su hash. Un mismo código universitario no puede abrir otra participación del mismo cuestionario y versión. Si se pierde el navegador original, un miembro debe gestionar la recuperación.
+- **Privacidad:** el aspirante ve solo su nota y su posición, no los nombres de otros. Los miembros ven los resultados en **Resultados** y pueden pasarlos al Excel del ciclo.
+- **Práctica y evaluación separadas:** un código con *práctica tipo juego* activada no se acepta como evaluación, porque la práctica entrega sus soluciones al navegador. Ahora `/api/practice` solo sirve cuestionarios con práctica activada. Si un taller de práctica y su evaluación comparten preguntas, practicar revela esas respuestas: usa preguntas distintas.
+- **Almacenamiento:** en la nube, la tabla `sc_web_attempts` (`supabase/migrations/007_server_evaluation.sql`, que debes ejecutar en SQL Editor antes de publicar), con RLS y acceso solo para `service_role`. En el servidor local, `.private/attempts.json`. Los intentos antiguos guardados solo en `localStorage` no se migran.
+- **Límites:** 30 ingresos cada 15 minutos por IP. Si dos pestañas envían a la vez, solo una gana; la otra recibe un aviso para recargar.
+
+Archivos: `server/evaluation.mjs` (reglas comunes), `server/local-attempts.mjs`, los cambios en `server/cloud-api.mjs` y `server/member-api.mjs`, `src/service.ts` y `src/Teacher.tsx`. Pruebas: `tests/evaluation.test.mjs`, 7 pruebas que cubren reglas, servidor local por HTTP y adaptador de Supabase simulado.
+
+Verificación: 71 pruebas aprobadas, TypeScript sin errores y compilaciones demo y nube sin el motor de soluciones. En navegador, sobre una copia aislada del proyecto, se comprobó:
+
+- rechazo de un código de práctica;
+- respuesta del servidor sin soluciones;
+- diez preguntas respondidas con nota 16/20 calculada en el servidor;
+- archivo de intentos sin el token en claro;
+- panel de miembros mostrando el resultado y habilitando el Excel del ciclo.
+
+**Pendiente:** ejecutar la migración 007 y probar contra el proyecto real de Supabase y Vercel.
