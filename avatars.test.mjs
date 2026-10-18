@@ -1,0 +1,13 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {avatars,normalizeAvatar,preferredAvatar,rememberAvatar} from '../src/avatars.mjs';
+import {createGame,addPlayer,snapshot} from '../src/live-model.mjs';
+import {liveReport,validReport} from '../src/live-history.mjs';
+import {createRun,recordOf,answerQuestion} from '../src/practice-model.mjs';
+const question={id:1,type:'choice',options:['A','B'],solution:0,points:2};
+const quiz={id:'test',revision:1,title:'Avatares',questions:[question],game:{enabled:true,timer:0,powerups:false}};
+test('La colección contiene 16 identificadores únicos y rechaza imágenes externas o valores manipulados',()=>{assert.equal(avatars.length,16);assert.equal(new Set(avatars.map(a=>a.id)).size,16);for(const v of [undefined,null,{},'https://evil.test/a.png','<img>','constructor','unknown'])assert.equal(normalizeAvatar(v),'castor');for(const a of avatars)assert.equal(normalizeAvatar(a.id),a.id)});
+test('El personaje viaja con el participante sin exponer su código universitario',()=>{const g=addPlayer(createGame(quiz,{requireUniversityCode:true}),'ana','Ana','20260001','robot');const publicState=snapshot(g,0);assert.equal(publicState.players[0].avatar,'robot');assert.equal(JSON.stringify(publicState).includes('20260001'),false);assert.equal(addPlayer(g,'ana','Ana','20260001','gato').players.ana.avatar,'robot');const legacy={...g,players:{ana:{...g.players.ana,avatar:undefined}}};assert.equal(snapshot(legacy,0).players[0].avatar,'castor')});
+test('El historial conserva el avatar y sigue aceptando registros anteriores',()=>{const g={...addPlayer(createGame(quiz),'ana','Ana','20260001','capibara'),phase:'podium'};const r=liveReport(g);assert.equal(r.rows[0].avatar,'capibara');assert.equal(validReport(r),true);assert.equal(validReport({...r,rows:r.rows.map(p=>({...p,avatar:undefined}))}),true);assert.equal(validReport({...r,rows:r.rows.map(p=>({...p,avatar:'https://evil.test/image'}))}),false)});
+test('El personaje se conserva en práctica sin cambiar la puntuación',()=>{const r=createRun(quiz,'Ana'),withAvatar=answerQuestion({...r,avatar:'panda'},question,0,100).run,without=answerQuestion(r,question,0,100).run;assert.equal(withAvatar.score,without.score);assert.equal(recordOf(withAvatar).avatar,'panda');assert.equal(recordOf(without).avatar,'castor')});
+test('Recordar la selección tolera navegadores sin almacenamiento disponible',()=>{const before=globalThis.localStorage;try{globalThis.localStorage={getItem(){throw new Error('bloqueado')},setItem(){throw new Error('bloqueado')}};assert.equal(preferredAvatar(),'castor');assert.equal(rememberAvatar('buho'),'buho')}finally{globalThis.localStorage=before}});

@@ -1,3 +1,4 @@
+import {Avatar} from './Avatar';
 import {liveReport} from './live-history.mjs';
 import {archivedQuiz} from './member-model.mjs';
 
@@ -97,9 +98,9 @@ export function LiveHost(){
 
    if(known&&!sameKey(known.pub,pub)){void reject(id,'Ese identificador ya está en uso. Recarga e intenta de nuevo.');return}
 
-   let key:CryptoKey,name:string,universityCode:string;try{key=known?.key??await sharedKey(k.dh,pub);({name,universityCode}=await unseal<{name:string;universityCode:string}>(key,m.box as Box))}catch{return}
+   let key:CryptoKey,name:string,universityCode:string,avatar:string;try{key=known?.key??await sharedKey(k.dh,pub);({name,universityCode,avatar}=await unseal<{name:string;universityCode:string;avatar:string}>(key,m.box as Box))}catch{return}
 
-   try{const next=addPlayer(gameRef.current,id,name,universityCode);players.current.set(id,{pub,key});update(()=>next);queue()}catch(e){void reject(id,e instanceof Error?e.message:'No se pudo ingresar.')}
+   try{const next=addPlayer(gameRef.current,id,name,universityCode,avatar);players.current.set(id,{pub,key});update(()=>next);queue()}catch(e){void reject(id,e instanceof Error?e.message:'No se pudo ingresar.')}
 
   }else if(m.t==='answer'){
 
@@ -173,13 +174,13 @@ export function LiveHost(){
 
   {game.phase==='lobby'?<div className="livelobby"><div className="livejoin"><p>Únete desde tu teléfono en</p><button className="liveurl" onClick={()=>{void navigator.clipboard?.writeText(joinUrl(game.pin));setCopied(true);setTimeout(()=>setCopied(false),1600)}}>{joinUrl(game.pin).replace(/^https?:\/\//,'')} {copied?<Check size={15}/>:<Copy size={15}/>}</button><p>con el PIN</p><strong className="livebigpin">{game.pin.slice(0,3)} {game.pin.slice(3)}</strong></div><div className="liveqr" aria-label="Código QR para unirse" dangerouslySetInnerHTML={{__html:qr}}/>
 
-   <div className="liveplayers"><div className="liveplayershead"><span><Users size={18}/> {ranked.length} jugador{ranked.length===1?'':'es'}</span><button className="primary" disabled={!ranked.length} onClick={()=>update(g=>startQuestion(g,Date.now()))}><Play size={18}/> Comenzar</button></div>{ranked.length?<div className="livechipsplayers">{ranked.map(p=><span key={p.id} className="liveplayer">{p.name}<button aria-label={`Retirar a ${p.name}`} title="Retirar" onClick={()=>{players.current.delete(p.id);update(g=>removePlayer(g,p.id));void reject(p.id,'El miembro GADEST te retiró de esta partida.')}}><X size={13}/></button></span>)}</div>:<p className="livewaiting">Esperando jugadores…</p>}</div></div>
+   <div className="liveplayers"><div className="liveplayershead"><span><Users size={18}/> {ranked.length} jugador{ranked.length===1?'':'es'}</span><button className="primary" disabled={!ranked.length} onClick={()=>update(g=>startQuestion(g,Date.now()))}><Play size={18}/> Comenzar</button></div>{ranked.length?<div className="livechipsplayers">{ranked.map(p=><span key={p.id} className="liveplayer"><Avatar id={p.avatar} size={44} decorative/>{p.name}<button aria-label={`Retirar a ${p.name}`} title="Retirar" onClick={()=>{players.current.delete(p.id);update(g=>removePlayer(g,p.id));void reject(p.id,'El miembro GADEST te retiró de esta partida.')}}><X size={13}/></button></span>)}</div>:<p className="livewaiting">Esperando jugadores…</p>}</div></div>
 
   :game.phase==='leaderboard'||game.phase==='podium'?<div className="liveboard"><h2>{game.phase==='podium'?<><Trophy size={30}/> Podio final</>:'Clasificación'}</h2>
 
-   {game.phase==='podium'&&<div className="livepodium">{[1,0,2].map(i=>ranked[i]&&<div key={i} className={`livepodiumplace p${i+1}`}><b>{ranked[i].name}</b><small>{ranked[i].score} pts · {ranked[i].correct}/{game.quiz.questions.length}</small><div>{i+1}</div></div>)}</div>}
+   {game.phase==='podium'&&<div className="livepodium">{[1,0,2].map(i=>ranked[i]&&<div key={i} className={`livepodiumplace p${i+1}`}><Avatar id={ranked[i].avatar} size={104} mood="celebrate"/><b>{ranked[i].name}</b><small>{ranked[i].score} pts · {ranked[i].correct}/{game.quiz.questions.length}</small><div>{i+1}</div></div>)}</div>}
 
-   <ol className="liveranking">{ranked.slice(game.phase==='podium'?3:0,game.phase==='podium'?13:5).map((p,i)=><li key={p.id}><span>{i+(game.phase==='podium'?4:1)}</span><b>{p.name}</b>{game.phase==='leaderboard'&&game.round[p.id]?.gained?<small>+{game.round[p.id].gained}</small>:null}<strong>{p.score}</strong></li>)}</ol>
+   <ol className="liveranking">{ranked.slice(game.phase==='podium'?3:0,game.phase==='podium'?13:5).map((p,i)=><li key={p.id}><span>{i+(game.phase==='podium'?4:1)}</span><b className="avataridentity"><Avatar id={p.avatar} size={42} decorative/>{p.name}</b>{game.phase==='leaderboard'&&game.round[p.id]?.gained?<small>+{game.round[p.id].gained}</small>:null}<strong>{p.score}</strong></li>)}</ol>
 
    <div className="liveactions">{game.phase==='podium'?<><button className="secondarylive" disabled={savingReport||saveStatus.startsWith('Resultados guardados')} onClick={()=>void saveReport()}>{savingReport?'Guardando...':'Guardar resultados'}</button><span role="status">{saveStatus}</span><button className="secondarylive" onClick={()=>exportCSV(game)}><Download size={17}/> Exportar CSV</button><button className="primary" onClick={finish}><RotateCcw size={17}/> Nueva partida</button></>:<button className="primary" onClick={()=>update(g=>startQuestion(g,Date.now()))}>Siguiente pregunta <SkipForward size={18}/></button>}</div></div>
 
