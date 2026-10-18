@@ -1,3 +1,4 @@
+import {visibleCatalog,mergeWorkspace} from './workspace-model.mjs';
 import {validReport} from '../src/live-history.mjs';
 import {createClient} from '@supabase/supabase-js';
 
@@ -109,23 +110,24 @@ export function createCloudApi({client,env=process.env}={}){
 
     const row=check(await db.from('sc_web_catalog').select('data').eq('id',1).maybeSingle());const quiz=row?.data.publications.filter(q=>q.code===url.searchParams.get('code')?.toUpperCase()).at(-1);
 
-    if(!quiz||(row.data.archivedQuizIds??[]).includes(quiz.id)||!quiz.game?.enabled)throw error(404,'No hay una práctica habilitada con ese código.');return send(200,quiz);
+    const draft=row?.data.drafts.find(q=>q.id===quiz?.id);if(!quiz||(draft?.owner&&draft.visibility!=='group'&&draft.owner!==member?.username)||(row.data.archivedQuizIds??[]).includes(quiz.id)||!quiz.game?.enabled)throw error(404,'No hay una práctica habilitada con ese código.');return send(200,quiz);
 
    }
 
    if(route==='/api/member/catalog'&&req.method==='GET'){
 
-    requireMember();const row=check(await db.from('sc_web_catalog').select('*').eq('id',1).maybeSingle());if(!row)throw error(503,'Falta cargar la biblioteca inicial en Supabase.');return send(200,{...row.data,serverRevision:row.revision});
+    requireMember();const row=check(await db.from('sc_web_catalog').select('*').eq('id',1).maybeSingle());if(!row)throw error(503,'Falta cargar la biblioteca inicial en Supabase.');return send(200,{...visibleCatalog(row.data,member.username),serverRevision:row.revision});
 
    }
 
    if(route==='/api/member/catalog'&&req.method==='PUT'){
 
-    requireMember();if(!Array.isArray(body.drafts)||!Array.isArray(body.publications)||body.drafts.length>100||body.publications.length>1000||(body.archivedQuizIds!==undefined&&(!Array.isArray(body.archivedQuizIds)||body.archivedQuizIds.length>100||body.archivedQuizIds.some(id=>typeof id!=='string'))))throw error(400,'Biblioteca no válida.');
+    requireMember();if(!Array.isArray(body.drafts)||!Array.isArray(body.publications)||body.drafts.length>100||(body.deletedQuizIds!==undefined&&(!Array.isArray(body.deletedQuizIds)||body.deletedQuizIds.length>10000||body.deletedQuizIds.some(id=>typeof id!=='string')))||body.publications.length>1000||(body.archivedQuizIds!==undefined&&(!Array.isArray(body.archivedQuizIds)||body.archivedQuizIds.length>100||body.archivedQuizIds.some(id=>typeof id!=='string'))))throw error(400,'Biblioteca no válida.');
 
     if(body.publications.some(q=>validateQuiz(q).length))throw error(400,'Revisa las preguntas publicadas.');
 
-    const revision=check(await db.rpc('sc_web_save_catalog',{p_revision:body.serverRevision||0,p_data:{drafts:body.drafts,publications:body.publications,archivedQuizIds:body.archivedQuizIds??[]}}));if(revision===null)throw error(409,'Otro miembro guardó cambios. Exporta tu borrador y recarga la biblioteca.');return send(200,{ok:true,serverRevision:revision});
+    const previous=check(await db.from('sc_web_catalog').select('data').eq('id',1).maybeSingle());const merged=mergeWorkspace(previous?.data??{drafts:[],publications:[]},body,member.username);
+    const revision=check(await db.rpc('sc_web_save_catalog',{p_revision:body.serverRevision||0,p_data:merged}));if(revision===null)throw error(409,'Otro miembro guardó cambios. Exporta tu borrador y recarga la biblioteca.');return send(200,{ok:true,serverRevision:revision});
 
    }
 

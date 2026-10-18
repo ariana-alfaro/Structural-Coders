@@ -66,14 +66,15 @@ test('API en nube: las sesiones funcionan entre instancias y solo miembros puede
   assert.equal(tables.sc_web_live_results.length,1);
   assert.deepEqual((await (await request('/api/member/live-results')).json()).reports,[report]);
   assert.equal((await request('/api/member/live-results',{report:{...report,id:crypto.randomUUID(),rows:[{...report.rows[0],universityCode:''}]}})).status,400);
-  const catalog={drafts:[],publications:[],archivedQuizIds:['removed-quiz'],serverRevision:0};assert.equal((await request('/api/member/catalog',catalog,'PUT')).status,200);assert.equal((await request('/api/member/catalog',catalog,'PUT')).status,409);
+  const catalog={drafts:[],publications:[],archivedQuizIds:[],serverRevision:0};assert.equal((await request('/api/member/catalog',catalog,'PUT')).status,200);assert.equal((await request('/api/member/catalog',catalog,'PUT')).status,409);
 
-  assert.deepEqual((await (await request('/api/member/catalog')).json()).archivedQuizIds,['removed-quiz']);
+  assert.deepEqual((await (await request('/api/member/catalog')).json()).archivedQuizIds,[]);
   const bank=JSON.parse(await readFile(new URL('../content/workshops.json',import.meta.url),'utf8'));
-  const draft=bank.quizzes.find(q=>q.game?.enabled),publication=preparePublication(draft,1);
+  const draft={...bank.quizzes.find(q=>q.game?.enabled),owner:'Ariana',visibility:'private'},publication=preparePublication(draft,1);
   const active={drafts:[draft],publications:[publication],archivedQuizIds:[],serverRevision:1};
   assert.equal((await request('/api/member/catalog',active,'PUT')).status,200);
   assert.equal((await request('/api/practice?code='+draft.code)).status,200);
+  {const savedCookie=cookie;cookie='';assert.equal((await request('/api/practice?code='+draft.code)).status,404);cookie=savedCookie;}
   assert.equal((await request('/api/member/catalog',{...active,serverRevision:2,archivedQuizIds:[draft.id]},'PUT')).status,200);
   assert.equal((await request('/api/practice?code='+draft.code)).status,404);
   assert.equal((await request('/api/member/catalog',{...active,serverRevision:3},'PUT')).status,200);
@@ -81,6 +82,15 @@ test('API en nube: las sesiones funcionan entre instancias y solo miembros puede
   assert.deepEqual((await (await request('/api/member/catalog')).json()).drafts,[draft]);
 
 
+  const toArchive=await (await request('/api/member/catalog')).json();assert.equal((await request('/api/member/catalog',{...toArchive,archivedQuizIds:[draft.id]},'PUT')).status,200);
+  const beforePurge=await (await request('/api/member/catalog')).json();
+  const purged={drafts:[],publications:[],archivedQuizIds:[],deletedQuizIds:[draft.id],serverRevision:beforePurge.serverRevision};
+  assert.equal((await request('/api/member/catalog',purged,'PUT')).status,200);
+  const afterPurge=await (await request('/api/member/catalog')).json();
+  assert.deepEqual(afterPurge.deletedQuizIds,[draft.id]);
+  assert.equal((await request('/api/practice?code='+draft.code)).status,404);
+  assert.deepEqual((await (await request('/api/member/live-results')).json()).reports,[report]);
+  assert.equal((await request('/api/member/catalog',{...active,serverRevision:afterPurge.serverRevision},'PUT')).status,409);
   assert.equal((await request('/api/member/password',{current:'Clave-de-prueba-123',password:'Otra-clave-prueba-456'})).status,200);
 
   assert.equal((await request('/api/member/logout',{})).status,200);assert.equal((await request('/api/member/catalog')).status,401);
@@ -99,5 +109,29 @@ test('API en nube: las sesiones funcionan entre instancias y solo miembros puede
 
  }finally{await new Promise(resolve=>server.close(resolve))}
 
+});
+
+test('Espacios por API: privacidad, compartir y protección del original entre Ariana y Renzo',async()=>{
+ const bank=JSON.parse(await readFile(new URL('../content/workshops.json',import.meta.url),'utf8'));
+ const original={...bank.quizzes[0],owner:'Ariana',visibility:'private'};
+ const credential=await passwordHash('Prueba-espacios-123');
+ const tables={sc_web_members:['Ariana','Renzo'].map(username=>({username,username_key:username.toLowerCase(),temporary:false,...credential})),sc_web_catalog:[{id:1,revision:0,data:{drafts:[original],publications:[preparePublication(original,1)]}}]};
+ const handler=createCloudApi({client:fakeDatabase(tables),env:{APP_URL:'https://quiz.example'}});
+ const server=createServer((req,res)=>handler(req,res));await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));const base=`http://127.0.0.1:${server.address().port}`;const cookies={};
+ async function request(username,route,body,method=body?'POST':'GET'){
+  const response=await fetch(base+route,{method,headers:{...(cookies[username]?{cookie:cookies[username]}:{}),...(body?{'Content-Type':'application/json',Origin:'https://quiz.example'}:{})},body:body?JSON.stringify(body):undefined});if(response.headers.get('set-cookie'))cookies[username]=response.headers.get('set-cookie').split(';')[0];return response;
+ }
+ try{
+  for(const username of ['Ariana','Renzo'])assert.equal((await request(username,'/api/member/login',{username,password:'Prueba-espacios-123'})).status,200);
+  assert.equal((await (await request('Renzo','/api/member/catalog')).json()).drafts.length,0);
+  assert.equal((await request('Renzo','/api/practice?code='+original.code)).status,404);
+  let a=await (await request('Ariana','/api/member/catalog')).json();const r=await (await request('Renzo','/api/member/catalog')).json();
+  const renzo={...original,id:crypto.randomUUID(),code:'RENZOO',owner:'Renzo'};r.drafts.push(renzo);r.publications.push(preparePublication(renzo,1));assert.equal((await request('Renzo','/api/member/catalog',r,'PUT')).status,200);
+  a=await (await request('Ariana','/api/member/catalog')).json();assert.equal(a.drafts.length,1);assert.equal(a.drafts[0].owner,'Ariana');a.drafts[0].visibility='group';assert.equal((await request('Ariana','/api/member/catalog',a,'PUT')).status,200);
+  let shared=await (await request('Renzo','/api/member/catalog')).json();assert.equal(shared.drafts.length,2);shared.drafts.find(q=>q.owner==='Ariana').title='Cambio no autorizado';assert.equal((await request('Renzo','/api/member/catalog',shared,'PUT')).status,403);
+  assert.equal((await request('Renzo','/api/practice?code='+original.code)).status,200);
+  a=await (await request('Ariana','/api/member/catalog')).json();assert.equal(a.drafts[0].title,original.title);a.drafts[0].visibility='private';assert.equal((await request('Ariana','/api/member/catalog',a,'PUT')).status,200);
+  shared=await (await request('Renzo','/api/member/catalog')).json();assert.equal(shared.drafts.length,1);assert.equal(shared.drafts[0].owner,'Renzo');assert.equal((await request('Renzo','/api/practice?code='+original.code)).status,404);
+ }finally{await new Promise(resolve=>server.close(resolve))}
 });
 

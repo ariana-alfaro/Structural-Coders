@@ -1,3 +1,4 @@
+import {visibleCatalog,mergeWorkspace} from './workspace-model.mjs';
 import {validReport} from '../src/live-history.mjs';
 import {randomBytes,scrypt,timingSafeEqual,createHash} from 'node:crypto';
 
@@ -87,7 +88,7 @@ export async function createMemberApi(directory=path.resolve('.private')){
 
     const data=await readCatalog();const quiz=data.publications.filter(q=>q.code===url.searchParams.get('code')?.toUpperCase()).at(-1);
 
-    if(!quiz||(data.archivedQuizIds??[]).includes(quiz.id)||(!quiz.game?.enabled&&quiz.id.startsWith('sc26-')))return send(404,{error:'No hay una práctica habilitada con ese código.'});return send(200,quiz);
+    const draft=data.drafts.find(q=>q.id===quiz?.id);if(!quiz||(draft?.owner&&draft.visibility!=='group'&&draft.owner!==current?.username)||(data.archivedQuizIds??[]).includes(quiz.id)||(!quiz.game?.enabled&&quiz.id.startsWith('sc26-')))return send(404,{error:'No hay una práctica habilitada con ese código.'});return send(200,quiz);
 
    }
 
@@ -118,15 +119,15 @@ export async function createMemberApi(directory=path.resolve('.private')){
 
    }
 
-   if(url.pathname==='/api/member/catalog'&&req.method==='GET')return send(200,await readCatalog());
+   if(url.pathname==='/api/member/catalog'&&req.method==='GET')return send(200,visibleCatalog(await readCatalog(),current.username));
 
    if(url.pathname==='/api/member/catalog'&&req.method==='PUT'){
 
-    if(!Array.isArray(body.drafts)||!Array.isArray(body.publications)||body.drafts.length>100||body.publications.length>1000||(body.archivedQuizIds!==undefined&&(!Array.isArray(body.archivedQuizIds)||body.archivedQuizIds.length>100||body.archivedQuizIds.some(id=>typeof id!=='string'))))return send(400,{error:'Biblioteca no válida.'});
+    if(!Array.isArray(body.drafts)||!Array.isArray(body.publications)||body.drafts.length>100||(body.deletedQuizIds!==undefined&&(!Array.isArray(body.deletedQuizIds)||body.deletedQuizIds.length>10000||body.deletedQuizIds.some(id=>typeof id!=='string')))||body.publications.length>1000||(body.archivedQuizIds!==undefined&&(!Array.isArray(body.archivedQuizIds)||body.archivedQuizIds.length>100||body.archivedQuizIds.some(id=>typeof id!=='string'))))return send(400,{error:'Biblioteca no válida.'});
 
     if(body.publications.some(q=>validateQuiz(q).length))return send(400,{error:'Hay una publicación con preguntas no válidas.'});
 
-    const write=async()=>{const previous=await readCatalog();if((body.serverRevision||0)!==(previous.serverRevision||0)){const error=new Error('Otro miembro guardó cambios. Exporta tu borrador y recarga la biblioteca antes de continuar.');error.status=409;throw error}body.serverRevision=(previous.serverRevision||0)+1;await writeFile(catalogFile+'.tmp',JSON.stringify(body),{mode:0o600});await rename(catalogFile+'.tmp',catalogFile)};
+    const write=async()=>{const previous=await readCatalog();if((body.serverRevision||0)!==(previous.serverRevision||0)){const error=new Error('Otro miembro guardó cambios. Exporta tu borrador y recarga la biblioteca antes de continuar.');error.status=409;throw error}const merged=mergeWorkspace(previous,body,current.username);body.serverRevision=(previous.serverRevision||0)+1;merged.serverRevision=body.serverRevision;await writeFile(catalogFile+'.tmp',JSON.stringify(merged),{mode:0o600});await rename(catalogFile+'.tmp',catalogFile)};
 
     saving=saving.catch(()=>{}).then(write);await saving;return send(200,{ok:true,serverRevision:body.serverRevision});
 
