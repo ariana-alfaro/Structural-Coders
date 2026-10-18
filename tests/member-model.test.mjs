@@ -1,0 +1,5 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {archiveQuiz,restoreQuiz,archivedQuiz,usableLocalResults} from '../src/member-model.mjs';
+test('Eliminar y restaurar conserva preguntas, publicaciones y configuración',()=>{const original={drafts:[{id:'a',questions:[{title:'Editada'}]}],publications:[{id:'a',revision:3}],setting:'conservar'};const deleted=archiveQuiz(original,'a');assert.equal(archivedQuiz(deleted,'a'),true);assert.deepEqual(deleted.drafts,original.drafts);assert.deepEqual(deleted.publications,original.publications);assert.equal(deleted.setting,'conservar');assert.equal(archivedQuiz(original,'a'),false);assert.deepEqual(archiveQuiz(deleted,'a').archivedQuizIds,['a']);assert.equal(archivedQuiz(restoreQuiz(deleted,'a'),'a'),false);assert.throws(()=>archiveQuiz(original,'missing'));});
+test('Resultados dañados o incompletos no bloquean la navegación',()=>{for(const raw of ['{','{}','null','[null,{}]'])assert.deepEqual(usableLocalResults(raw),[]);const row={name:'Aspirante',score:18,elapsed:1000,finished:'2026-10-18T12:00:00Z'};assert.deepEqual(usableLocalResults(JSON.stringify([null,row,{}])),[row]);});
