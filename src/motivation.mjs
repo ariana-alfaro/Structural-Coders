@@ -1,0 +1,2 @@
+export function learningStats(answers){let streak=0,best=0;for(const a of answers){streak=a.correct?streak+1:0;best=Math.max(best,streak)}return {streak,best,completed:answers.length}}
+export function celebrationFor(answers,total=10){const {streak,completed}=learningStats(answers);if(completed===total)return '¡Construcción terminada!';if(completed===Math.ceil(total/2))return '¡Medio camino construido!';if(streak>=3&&streak%3===0)return `¡${streak} conexiones seguidas!`;return null}

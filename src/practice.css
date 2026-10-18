@@ -1,0 +1,36 @@
+/* Modo práctica tipo juego (reutiliza mosaicos y rankings de live.css) */
+.practicewrap{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+.practiceintro,.practicefinal,.practicefeedback,.practiceq{padding:26px;border:1px solid #304258;border-radius:16px;background:radial-gradient(ellipse at top,#2a1f4a66,transparent 65%),#191c28}
+.practiceintro{display:flex;flex-direction:column;gap:12px}.practiceintro .sectionicon{width:46px;height:46px}.practiceintro h1{font-size:30px}.practiceintro>p{margin:0;color:#c4cad9;font-size:14px;line-height:1.6}
+.practicechips{display:flex;flex-wrap:wrap;gap:8px}.practicechips span{display:inline-flex;align-items:center;gap:6px;background:#ffffff10;border:1px solid #ffffff1f;border-radius:999px;padding:6px 12px;font-size:12px;color:#dfe6f2}
+.practiceintro form{display:flex;flex-direction:column;gap:12px;margin-top:6px}.practiceintro label{font-size:11px;color:#b3b8cb}.practiceintro input{display:block;width:100%;border:1px solid #383e53;background:#111623;border-radius:7px;padding:13px 12px;margin-top:8px;color:#e9ebf4;font-size:15px}
+.practiceintro .primary{font-size:14px;background:#8b5cf6}.practiceintro .primary:hover:not(:disabled){background:#9d74f7}
+.practicepowerlist{list-style:none;margin:6px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:8px}.practicepowerlist li{display:grid;grid-template-columns:auto 1fr;gap:2px 8px;align-items:center;background:#141a26;border:1px solid #2a3446;border-radius:10px;padding:10px 12px;font-size:12px;color:#c4cad9}.practicepowerlist li span{grid-column:2;color:#8590a8;font-size:11px}.practicepowerlist svg{color:#c4a8ff}
+
+.practicehud{display:flex;align-items:center;gap:10px;font-size:14px;color:#dfe6f2}
+.practicehud>span{display:inline-flex;align-items:center;gap:6px;background:#ffffff10;border-radius:999px;padding:7px 13px;font-weight:600}
+.practicecount{margin-right:auto}.practicescore svg{color:#ffd166}.practicestreak svg{color:#ff9f5a}.practicestreak.hot{background:#ff7a3d33!important;color:#ffd3b8}
+.practicerank{font-family:'Space Grotesk';color:#c4a8ff}.practicerank small{color:#8590a8;font-weight:400}
+.practicetimer{position:relative;height:30px;border-radius:999px;background:#ffffff12;overflow:hidden}.practicetimer i{position:absolute;inset:0 auto 0 0;background:linear-gradient(90deg,#8b5cf6,#6bb8f1);transition:width .1s linear}
+.practicetimer span{position:relative;display:flex;align-items:center;justify-content:center;gap:5px;height:100%;font-size:13px;font-weight:700;color:#fff}
+.practicetimer.hurry i{background:linear-gradient(90deg,#e21b3c,#ff6b7d)}.practicetimer.frozen i{background:linear-gradient(90deg,#7dd3fc,#bae6fd)}.practicetimer.frozen span{color:#0b2540}.practicetimer.off span{color:#9aa4ba;font-weight:500}
+.practicepowers{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:12px;color:#8590a8}
+.practicepowers button{display:inline-flex;align-items:center;gap:6px;background:#2a1f4a;border:1px solid #6d4fc2;color:#e4d8ff;border-radius:9px;padding:8px 12px;font-size:12px;font-weight:600}.practicepowers button:hover:not(:disabled){background:#3a2b66}
+.practiceactive{background:#14532d;border:1px solid #2f7d4b;color:#bbf7d0;border-radius:999px;padding:5px 10px}
+.practiceq{display:flex;flex-direction:column;gap:14px}.practiceq h2{font-size:22px}.practiceq .livebrief{text-align:left;font-size:14px}
+.livetile.removed{opacity:.18;filter:grayscale(1);cursor:default}
+.practicenext{align-self:flex-end;font-size:14px!important;padding:12px 22px!important}
+.practicefeedback{display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px}
+.practicefeedback.good{background:#173d27;border-color:#2f7d4b}.practicefeedback.bad{background:#3d1a22;border-color:#7d2f3d}.practicefeedback h2{font-size:28px}
+.practicefeedback .livesolution{width:100%}
+.practiceshield{display:flex;align-items:center;gap:6px;margin:0;color:#bae6fd}
+.practiceaward{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px;margin:0;background:#2a1f4a;border:1px solid #6d4fc2;border-radius:10px;padding:8px 14px;color:#e4d8ff;animation:livepop .4s ease-out}.practiceaward b{display:inline-flex;align-items:center;gap:5px}
+.practiceboard{width:100%}.practiceboard .liveranking{text-align:left}.practiceboard h3{font-size:15px;margin-bottom:10px}
+.liveranking li.me{background:#c4a8ff;color:#1b1035}
+.practicefinal{display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px}.practicefinal>svg{color:#ffd166}.practicefinal h1{font-size:36px}.practicefinal h2{font-size:18px;margin-top:6px}.practicefinal .liveactions{width:100%}
+.gamesettings{display:flex;flex-direction:column;gap:10px;margin:10px 0 20px;padding-left:14px;border-left:2px solid #3d5b74}
+.gamesettings>label:first-child{font-size:12px;color:#b3b8cb}.gamesettings select{display:block;margin-top:7px;background:#111623;color:#e9ebf4;border:1px solid #383e53;border-radius:7px;padding:10px;font:inherit;font-size:13px}
+.gamesettingsnote{margin:0;font-size:11px;color:#8590a8}
+.practicegamebtn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:10px;background:#2a1f4a;border:1px solid #6d4fc2;color:#e4d8ff;border-radius:7px;padding:12px;font-size:12px;font-weight:600}.practicegamebtn:hover:not(:disabled){background:#3a2b66}
+@media(max-width:800px){.practiceintro,.practicefinal,.practicefeedback,.practiceq{padding:18px}.practicepowerlist{grid-template-columns:1fr}.practicehud{font-size:13px;gap:6px}.practicehud>span{padding:6px 10px}}
+@media(prefers-reduced-motion:reduce){.practiceaward{animation:none}.practicetimer i{transition:none}}

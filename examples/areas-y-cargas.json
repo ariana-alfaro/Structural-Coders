@@ -1,0 +1,46 @@
+{
+  "format": "structural-coders-quiz",
+  "version": 1,
+  "quizzes": [
+    {
+      "id": "example-areas",
+      "title": "Ejemplo docente — Áreas y cargas",
+      "description": "Ejemplo de dos preguntas con ponderaciones distintas.",
+      "course": "Structural Coders",
+      "cycle": "2026-1",
+      "code": "QA2026",
+      "hints": false,
+      "practice": false,
+      "updatedAt": "2026-10-16T00:00:00Z",
+      "questions": [
+        {
+          "id": 1,
+          "type": "input",
+          "title": "Área de una losa",
+          "topic": "Operadores aritméticos",
+          "brief": "Calcula el área y escribe únicamente el resultado.",
+          "code": "base = 8\nancho = 5\nprint(base * ancho)",
+          "options": [],
+          "solution": "40",
+          "points": 1,
+          "explanation": "El área se obtiene multiplicando la base por el ancho: 8 × 5 = 40."
+        },
+        {
+          "id": 2,
+          "type": "boolean",
+          "title": "Una lista puede crecer",
+          "topic": "Listas",
+          "brief": "¿append agrega un elemento al final de una lista?",
+          "code": "cargas = [10, 20]\ncargas.append(30)",
+          "options": [
+            "Verdadero",
+            "Falso"
+          ],
+          "solution": 0,
+          "points": 3,
+          "explanation": "append agrega un nuevo elemento al final. La lista queda [10, 20, 30]."
+        }
+      ]
+    }
+  ]
+}

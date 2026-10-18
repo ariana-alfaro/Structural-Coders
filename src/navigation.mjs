@@ -1,0 +1,2 @@
+export function viewFromHash(hash){if(hash==='#miembro'||hash==='#docente')return 'member';if(hash.startsWith('#vivo'))return 'live';return 'aspirant'}
+export function liveJoinUrl(pin,origin,pathname,publicUrl=''){const base=new URL(publicUrl||origin);if(!['http:','https:'].includes(base.protocol))throw new Error('La dirección pública debe ser HTTP o HTTPS.');const path=publicUrl&&base.pathname!=='/'?base.pathname:pathname;return `${base.origin}${path}#vivo=${pin}`}

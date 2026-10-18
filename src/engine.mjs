@@ -1,0 +1,8 @@
+// Only imported by demo mode. Real grading and solutions live in PostgreSQL.
+import {normalizeOutput} from './interactions.mjs';
+export const solutions = [0,'3',2,0,3,1,[2,1,0],1,[2,1,0],'12.50'];
+export const explanations = ['El paso -1 recorre toda la cadena desde el final hacia el inicio.','// devuelve el cociente entero: 17 dividido entre 5 da 3 y sobran 2.','El signo = dentro de la f-string conserva el texto de la expresión; ** calcula la potencia.','En Python, una misma variable puede referenciar valores de distintos tipos.','El operador * multiplica: 8 × 5 = 40.','Las listas vacías son falsy: bool([]) devuelve False.','Primero crea el diccionario, luego asigna acero a la clave material y finalmente consulta esa clave.','El operador & calcula la intersección: los elementos presentes en ambos conjuntos.','Primero se crea la lista, después append agrega el 3 y finalmente print muestra [1, 2, 3].','El formato .2f muestra dos cifras decimales, incluyendo el cero final.'];
+export function isCorrect(id, value) { return JSON.stringify(solutions[id-1]) === JSON.stringify(normalizeOutput(value)); }
+export function grade(answers) { return answers.reduce((sum,a)=>sum+(a.correct?2:0),0); }
+export function ranking(results) { return [...results].sort((a,b)=>b.score-a.score||a.elapsed-b.elapsed||a.finished.localeCompare(b.finished)); }
+export function recordAnswer(state, id, value, elapsed) { if(state.answers.some(a=>a.id===id)) throw new Error('Esta respuesta ya está registrada.'); if(id!==state.answers.length+1) throw new Error('Pregunta fuera de secuencia.'); return {...state,answers:[...state.answers,{id,value,elapsed,correct:isCorrect(id,value)}]}; }

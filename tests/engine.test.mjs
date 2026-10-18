@@ -1,0 +1,17 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {solutions,isCorrect,grade,ranking,recordAnswer} from '../src/engine.mjs';
+import {moveItem} from '../src/interactions.mjs';
+import {learningStats,celebrationFor} from '../src/motivation.mjs';
+test('La mejor racha se conserva al equivocarse y todos los intentos construyen avance',()=>assert.deepEqual(learningStats([{correct:true},{correct:true},{correct:true},{correct:false}]),{streak:0,best:3,completed:4}));
+test('Se celebra una racha y también la constancia aunque no haya aciertos',()=>{assert.equal(celebrationFor(Array.from({length:3},()=>({correct:true}))),'¡3 conexiones seguidas!');assert.equal(celebrationFor(Array.from({length:5},()=>({correct:false}))),'¡Medio camino construido!');assert.equal(celebrationFor([{correct:false}]),null)});
+test('Arrastrar mueve una línea y conserva las demás sin mutar la lista',()=>{const a=[0,1,2];assert.deepEqual(moveItem(a,2,0),[2,0,1]);assert.deepEqual(a,[0,1,2]);assert.deepEqual(moveItem([2,0,1],1,2),[2,1,0]);assert.deepEqual(moveItem(a,0,8),a)});
+test('Terminal admite espacios exteriores, pero exige la precisión solicitada',()=>{assert.ok(isCorrect(2,' 3 '));assert.ok(!isCorrect(2,'3.4'));assert.ok(isCorrect(10,'12.50'));assert.ok(!isCorrect(10,'12.5'));assert.ok(!isCorrect(10,'print(12.50)'))});
+test('Ambos retos de ordenar requieren la secuencia completa',()=>{assert.ok(isCorrect(7,[2,1,0]));assert.ok(!isCorrect(7,[2,0,1]));assert.ok(!isCorrect(9,[2,1]))});
+test('Las diez soluciones producen 20 puntos',()=>assert.equal(grade(solutions.map((value,i)=>({correct:isCorrect(i+1,value)}))),20));
+test('Sin aciertos, cero puntos y sin penalizaciones',()=>assert.equal(grade([{correct:false},{correct:false}]),0));
+test('La nota prevalece sobre el tiempo; los empates usan tiempo y fecha',()=>{const rows=[{score:18,elapsed:100,finished:'2026-01-01'},{score:20,elapsed:500,finished:'2026-01-02'},{score:20,elapsed:200,finished:'2026-01-02'},{score:20,elapsed:200,finished:'2026-01-01'}];assert.deepEqual(ranking(rows),[rows[3],rows[2],rows[1],rows[0]])});
+test('No se puede duplicar una respuesta',()=>{const s=recordAnswer({answers:[]},1,0,100);assert.throws(()=>recordAnswer(s,1,1,200),/registrada/)});
+test('No se puede saltar una pregunta',()=>assert.throws(()=>recordAnswer({answers:[]},2,1,100),/secuencia/));
+test('El orden de instrucciones importa',()=>{assert.ok(isCorrect(9,[2,1,0]));assert.ok(!isCorrect(9,[0,1,2]))});
+test('Una sesión serializada conserva sus respuestas',()=>{const s=recordAnswer({token:'demo',answers:[]},1,0,100);assert.deepEqual(JSON.parse(JSON.stringify(s)),s)});
