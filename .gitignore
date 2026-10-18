@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.env
+.env.local
+*.tsbuildinfo
+
+.private/
+
+.env.*
+!.env.example
+!.env.cloud.example
+.claude/
+.vercel/
+structural-coders/
