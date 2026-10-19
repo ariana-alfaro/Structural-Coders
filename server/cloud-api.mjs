@@ -149,7 +149,12 @@ export function createCloudApi({client,env=process.env}={}){
    }
 
    if(route==='/api/member/live-results'&&req.method==='GET'){
-    requireMember();const rows=check(await db.from('sc_web_live_results').select('report,created_at').order('created_at',{ascending:false}).limit(100));return send(200,{reports:rows.map(r=>r.report)});
+    requireMember();const rows=check(await db.from('sc_web_live_results').select('report,owner,created_at').order('created_at',{ascending:false}).limit(100));return send(200,{reports:rows.map(r=>r.report),deletable:rows.filter(r=>r.owner===member.username).map(r=>r.report.id)});
+   }
+   if(route==='/api/member/live-results/delete'&&req.method==='POST'){
+    requireMember();if(typeof body.id!=='string'||!/^[a-f0-9-]{36}$/.test(body.id))throw error(400,'Partida no válida.');
+    const prior=check(await db.from('sc_web_live_results').select('id,owner').eq('id',body.id).maybeSingle());if(!prior)throw error(404,'La partida ya no existe.');if(prior.owner!==member.username)throw error(403,'Solo quien guardó la partida puede eliminarla.');
+    check(await db.from('sc_web_live_results').delete().eq('id',body.id).eq('owner',member.username));return send(200,{ok:true});
    }
    if(route==='/api/member/live-results'&&req.method==='POST'){
     requireMember();if(!validReport(body.report))throw error(400,'Resultados incompletos. Verifica los codigos universitarios.');

@@ -20,3 +20,5 @@ header{height:133px;gap:40px}.brand.brandstack{display:flex;flex-direction:colum
 
 /* Navegación y papelera del panel GADEST */
 .teachertabs{position:sticky;top:0;z-index:20;background:#10131e;padding:12px 0;overflow-x:auto}.teachertabs button{flex-shrink:0}.memberquickactions{display:flex;gap:12px;flex-wrap:wrap}.resultsback{margin-bottom:20px}.resultscope{padding:16px;border-left:3px solid #77c7ff;background:#11283b;line-height:1.6}.deleteoverlay{position:fixed;inset:0;z-index:100;background:#000b;display:grid;place-items:center;padding:24px}.deleteconfirm{background:#192938;border:1px solid #78b6df;border-radius:18px;padding:32px;max-width:540px;width:100%;box-shadow:0 24px 80px #0008}.deleteconfirm p{line-height:1.65}.librarycardactions{flex-wrap:wrap}
+.livehistoryactions{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}.livehistoryactions button{display:inline-flex;align-items:center;gap:6px}
+.dangerbutton{color:#ffb4b4!important;border-color:#6b2b36!important}.dangerbutton:hover:not(:disabled){background:#3a1d24!important}

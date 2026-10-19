@@ -90,6 +90,13 @@ test('API en nube: las sesiones funcionan entre instancias y solo miembros puede
   assert.deepEqual(afterPurge.deletedQuizIds,[draft.id]);
   assert.equal((await request('/api/practice?code='+draft.code)).status,404);
   assert.deepEqual((await (await request('/api/member/live-results')).json()).reports,[report]);
+  {const foreign={...report,id:crypto.randomUUID()};tables.sc_web_live_results.push({id:foreign.id,owner:'Renzo',report:foreign,created_at:'2026-01-01'});
+   const listed=await (await request('/api/member/live-results')).json();assert.deepEqual(listed.deletable,[report.id]);
+   assert.equal((await request('/api/member/live-results/delete',{id:foreign.id})).status,403);
+   assert.equal((await request('/api/member/live-results/delete',{id:'no-es-un-id'})).status,400);
+   assert.equal((await request('/api/member/live-results/delete',{id:report.id})).status,200);
+   assert.equal((await request('/api/member/live-results/delete',{id:report.id})).status,404);
+   assert.deepEqual(tables.sc_web_live_results.map(r=>r.id),[foreign.id]);tables.sc_web_live_results.push({id:report.id,owner:'Ariana',report});tables.sc_web_live_results.splice(0,1);}
   assert.equal((await request('/api/member/catalog',{...active,serverRevision:afterPurge.serverRevision},'PUT')).status,409);
   assert.equal((await request('/api/member/password',{current:'Clave-de-prueba-123',password:'Otra-clave-prueba-456'})).status,200);
 

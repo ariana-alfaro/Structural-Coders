@@ -105,12 +105,18 @@ export async function createMemberApi(directory=path.resolve('.private')){
 
    if(url.pathname==='/api/member/live-results'){
     const reportFile=path.join(directory,'live-results.json');let reports=[];try{reports=JSON.parse(await readFile(reportFile,'utf8'))}catch(e){if(e.code!=='ENOENT')throw e}
-    if(req.method==='GET')return send(200,{reports:reports.slice(-100).reverse()});
+    if(req.method==='GET'){const recent=reports.slice(-100).reverse();return send(200,{reports:recent.map(({_owner,...r})=>r),deletable:recent.filter(r=>!r._owner||r._owner===current.username).map(r=>r.id)})}
     if(req.method==='POST'){
      if(!validReport(body.report))return send(400,{error:'Resultados incompletos. Verifica los codigos universitarios.'});
-     const save=async()=>{let latest=[];try{latest=JSON.parse(await readFile(reportFile,'utf8'))}catch(e){if(e.code!=='ENOENT')throw e}if(!latest.some(r=>r.id===body.report.id)){latest.push(body.report);await writeFile(reportFile+'.tmp',JSON.stringify(latest),{mode:0o600});await rename(reportFile+'.tmp',reportFile)}};
+     const save=async()=>{let latest=[];try{latest=JSON.parse(await readFile(reportFile,'utf8'))}catch(e){if(e.code!=='ENOENT')throw e}if(!latest.some(r=>r.id===body.report.id)){latest.push({...body.report,_owner:current.username});await writeFile(reportFile+'.tmp',JSON.stringify(latest),{mode:0o600});await rename(reportFile+'.tmp',reportFile)}};
      saving=saving.catch(()=>{}).then(save);await saving;return send(200,{ok:true});
     }
+   }
+   if(url.pathname==='/api/member/live-results/delete'&&req.method==='POST'){
+    if(typeof body.id!=='string'||!/^[a-f0-9-]{36}$/.test(body.id))return send(400,{error:'Partida no válida.'});
+    const reportFile=path.join(directory,'live-results.json');
+    const remove=async()=>{let latest=[];try{latest=JSON.parse(await readFile(reportFile,'utf8'))}catch(e){if(e.code!=='ENOENT')throw e}const found=latest.find(r=>r.id===body.id);if(!found)throw Object.assign(new Error('La partida ya no existe.'),{status:404});if(found._owner&&found._owner!==current.username)throw Object.assign(new Error('Solo quien guardó la partida puede eliminarla.'),{status:403});await writeFile(reportFile+'.tmp',JSON.stringify(latest.filter(r=>r.id!==body.id)),{mode:0o600});await rename(reportFile+'.tmp',reportFile)};
+    saving=saving.catch(()=>{}).then(remove);await saving;return send(200,{ok:true});
    }
    if(url.pathname==='/api/member/password'&&req.method==='POST'){
 

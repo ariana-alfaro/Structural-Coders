@@ -240,3 +240,9 @@ Verificación: 71 pruebas aprobadas, TypeScript sin errores y compilaciones demo
 - panel de miembros mostrando el resultado y habilitando el Excel del ciclo.
 
 **Pendiente:** ejecutar la migración 007 y probar contra el proyecto real de Supabase y Vercel.
+
+## Historial de partidas en vivo: nota y eliminación
+
+- **Nota por aciertos:** cada partida guardada muestra la nota sobre 20 de cada participante (aciertos ÷ preguntas × 20, con un decimal). También aparece en el CSV del historial y en el del podio. Los puntos del juego siguen mostrándose aparte.
+- **Eliminar partidas:** quien guardó la partida ve **Eliminar partida**, que pide confirmación y borra definitivamente. Los demás miembros pueden verla y descargarla, pero no borrarla; el servidor lo comprueba. En el servidor local, las partidas guardadas antes de este cambio no tienen dueño registrado y cualquier miembro puede borrarlas.
+- **Supabase:** ejecuta `supabase/migrations/008_live_history_delete.sql`, que da permiso de borrado al servidor. Sin ella, eliminar responde «No se pudo acceder al almacenamiento compartido».

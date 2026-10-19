@@ -1,5 +1,5 @@
 import {Avatar} from './Avatar';
-import {liveReport} from './live-history.mjs';
+import {liveReport,liveGrade} from './live-history.mjs';
 import {archivedQuiz} from './member-model.mjs';
 
 import {useEffect,useRef,useState} from 'react';
@@ -136,7 +136,7 @@ export function LiveHost(){
 
  function importFile(file?:File){if(!file||!data)return;file.text().then(raw=>{const next=importBackup(raw,data);persistCatalog(next);setData(next);const first=next.drafts.find(d=>!validateQuiz(d).length);if(first&&!quizId)setQuizId(first.id)}).catch(e=>setError(e instanceof Error?e.message:'No se pudo importar.'))}
 
- function exportCSV(g:Game){const cell=(v:unknown)=>{let s=String(v);if(/^[=+@\-\t\r]/.test(s))s="'"+s;return '"'+s.replaceAll('"','""')+'"'};const csv='﻿'+[['Posición','Apodo','Codigo universitario','Puntos','Aciertos','Preguntas','Cuestionario'],...standings(g).map((p,i)=>[i+1,p.name,p.universityCode??'',p.score,p.correct,g.quiz.questions.length,g.quiz.title])].map(r=>r.map(cell).join(';')).join('\r\n');const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8;'}));const a=document.createElement('a');a.href=url;a.download=`en-vivo-${g.pin}.csv`;a.click();URL.revokeObjectURL(url)}
+ function exportCSV(g:Game){const cell=(v:unknown)=>{let s=String(v);if(/^[=+@\-\t\r]/.test(s))s="'"+s;return '"'+s.replaceAll('"','""')+'"'};const csv='﻿'+[['Posición','Apodo','Codigo universitario','Puntos','Aciertos','Preguntas','Nota (/20)','Cuestionario'],...standings(g).map((p,i)=>[i+1,p.name,p.universityCode??'',p.score,p.correct,g.quiz.questions.length,String(liveGrade(p.correct,g.quiz.questions.length)).replace('.',','),g.quiz.title])].map(r=>r.map(cell).join(';')).join('\r\n');const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8;'}));const a=document.createElement('a');a.href=url;a.download=`en-vivo-${g.pin}.csv`;a.click();URL.revokeObjectURL(url)}
 
 
 
