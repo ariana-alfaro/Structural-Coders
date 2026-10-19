@@ -17,7 +17,7 @@ async function rpc(name:string,args:Record<string,unknown>){const {data,error}=a
 // Fuera del modo Supabase heredado, el servidor de la app (local o nube) califica: el navegador nunca recibe soluciones.
 async function server(action:string,args:Record<string,unknown>){
  let response:Response;try{response=await fetch('/api/eval/'+action,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(args)})}catch{throw new Error('No hay conexión con el servidor. Revisa tu internet e inténtalo otra vez.')}
- const data=await response.json().catch(()=>({error:'Respuesta no válida del servidor.'}));if(!response.ok)throw new Error(data.error||'No se pudo completar la operación.');return data;
+ const data=await response.json().catch(()=>({error:'Respuesta no válida del servidor.'}));if(!response.ok)throw Object.assign(new Error(response.status===401&&action==='recover'?'Esa participación ya no se puede retomar en este navegador. Ingresa de nuevo con el código de evaluación.':data.error||'No se pudo completar la operación.'),{status:response.status});return data;
 }
 export async function join(name:string,student:string,code:string):Promise<Session>{return save(live?await rpc('join_quiz',{p_name:name,p_student:student,p_code:code}):await server('join',{name,student,code}))}
 export async function recover(s:Session):Promise<Session>{return save(live?await rpc('recover_quiz',{p_token:s.token}):await server('recover',{token:s.token}))}
