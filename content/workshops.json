@@ -151,7 +151,7 @@
         {
           "type": "order",
           "title": "Intercambio de luces",
-          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría.",
+          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría. El programa debe imprimir 7.",
           "options": [
             "a, b = 4, 7",
             "a, b = b, a",
@@ -239,7 +239,7 @@
         {
           "type": "blank",
           "title": "Corte de un registro",
-          "brief": "Arrastra al hueco la pieza que completa el código.",
+          "brief": "Arrastra al hueco la pieza que completa el código. El programa debe imprimir [20, 30].",
           "options": [
             "1",
             "3",
@@ -256,7 +256,7 @@
         {
           "type": "order",
           "title": "Copiar antes de cambiar",
-          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría.",
+          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría. print(original) va al final, después de modificar la copia.",
           "options": [
             "original = [2, 4]",
             "copia = original.copy()",
@@ -322,7 +322,7 @@
         {
           "type": "blank",
           "title": "Dos condiciones simultáneas",
-          "brief": "Arrastra al hueco la pieza que completa el código.",
+          "brief": "Arrastra al hueco la pieza que completa el código. Debe imprimir True solo si se cumplen las dos condiciones.",
           "options": [
             "in",
             "is",
@@ -339,7 +339,7 @@
         {
           "type": "order",
           "title": "Acumular una carga",
-          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría.",
+          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría. El programa debe imprimir 30.",
           "options": [
             "carga = 10",
             "carga += 5",
@@ -527,7 +527,7 @@
         {
           "type": "order",
           "title": "Una lectura que puede fallar",
-          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría.",
+          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría. La conversión float(\"seis\") debe estar dentro del bloque try.",
           "options": [
             "try:",
             "    luz = float(\"seis\")",
@@ -634,7 +634,7 @@
         {
           "type": "order",
           "title": "Iterar con una condición",
-          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría.",
+          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría. El programa debe imprimir 3.",
           "options": [
             "n = 1",
             "while n < 3:",
@@ -717,7 +717,7 @@
         {
           "type": "order",
           "title": "Clasificar una nota",
-          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría.",
+          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría. Al terminar, nivel debe valer \"Logrado\".",
           "options": [
             "nota = 16",
             "if nota >= 14:",
@@ -824,7 +824,7 @@
         {
           "type": "order",
           "title": "Una curva con ejes",
-          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría.",
+          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría. Primero se dibuja la curva y después se etiqueta el eje x.",
           "options": [
             "import matplotlib.pyplot as plt",
             "fig, ax = plt.subplots()",
@@ -892,7 +892,7 @@
         {
           "type": "blank",
           "title": "Seleccionar columnas",
-          "brief": "Arrastra al hueco la pieza que completa el código.",
+          "brief": "Arrastra al hueco la pieza que completa el código. El programa debe imprimir 30.",
           "options": [
             "\"Z\"",
             "\"L\"",
@@ -1588,7 +1588,7 @@
         {
           "type": "order",
           "title": "Del modelo al resultado",
-          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría.",
+          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría. Los pasos deben imprimirse en el orden del flujo: materiales, geometría y análisis.",
           "options": [
             "pasos = []",
             "pasos.append(\"Definir materiales y secciones\")",
@@ -1673,7 +1673,7 @@
         {
           "type": "order",
           "title": "Tratar un código de retorno",
-          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría.",
+          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría. estado se asigna después de comprobar el código de retorno.",
           "options": [
             "ret = 0",
             "if ret != 0:",
@@ -1865,7 +1865,7 @@
         {
           "type": "order",
           "title": "Guardar antes del análisis",
-          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría.",
+          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría. Primero se obtiene el modelo y luego se define la ruta del archivo.",
           "options": [
             "modelo = conexion.modelo",
             "ruta = \"portico.sdb\"",
@@ -2164,7 +2164,7 @@
         {
           "type": "order",
           "title": "Validar una geometría",
-          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría.",
+          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría. Al terminar, mensaje debe valer \"Altura inválida\".",
           "options": [
             "h = -2",
             "if h <= 0:",
@@ -2249,7 +2249,7 @@
         {
           "type": "order",
           "title": "Incrustar una figura",
-          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría.",
+          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría. El lienzo se dibuja antes de colocarlo en la ventana.",
           "options": [
             "from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg",
             "canvas = FigureCanvasTkAgg(fig, master=root)",
@@ -2354,7 +2354,7 @@
         {
           "type": "order",
           "title": "La primera app web",
-          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría.",
+          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría. El título va justo después del import.",
           "options": [
             "import streamlit as st",
             "st.title(\"Mi primera viga\")",
@@ -2546,7 +2546,7 @@
         {
           "type": "order",
           "title": "Dividir una pantalla",
-          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría.",
+          "brief": "Ordena las líneas para obtener un programa válido. Conserva la sangría. El bloque with izquierda va antes de escribir en derecha.",
           "options": [
             "import streamlit as st",
             "izquierda, derecha = st.columns(2)",

@@ -246,3 +246,20 @@ Verificación: 71 pruebas aprobadas, TypeScript sin errores y compilaciones demo
 - **Nota por aciertos:** cada partida guardada muestra la nota sobre 20 de cada participante (aciertos ÷ preguntas × 20, con un decimal). También aparece en el CSV del historial y en el del podio. Los puntos del juego siguen mostrándose aparte.
 - **Eliminar partidas:** quien guardó la partida ve **Eliminar partida**, que pide confirmación y borra definitivamente. Los demás miembros pueden verla y descargarla, pero no borrarla; el servidor lo comprueba. En el servidor local, las partidas guardadas antes de este cambio no tienen dueño registrado y cualquier miembro puede borrarlas.
 - **Supabase:** ejecuta `supabase/migrations/008_live_history_delete.sql`, que da permiso de borrado al servidor. Sin ella, eliminar responde «No se pudo acceder al almacenamiento compartido».
+
+## Preguntas con una sola respuesta correcta
+
+Revisé el banco de talleres ejecutando en Python todas las permutaciones de las preguntas de ordenar y todas las piezas de encajar. Encontré 17 preguntas con más de una respuesta posible: órdenes distintos con la misma salida, o con otra salida porque el enunciado no decía qué resultado se esperaba. Las de opción múltiple y de salida escrita coinciden con su solución.
+
+Ahora sus enunciados indican la salida esperada o la condición que fija el orden. Por ejemplo: «El programa debe imprimir 30» o «print(original) va al final». La calificación no cambió. Los cambios están en `scripts/question-fixes.mjs` y ya se aplicaron a `content/workshops.json`.
+
+Para actualizar una biblioteca ya cargada, el script solo toca los talleres del equipo y los enunciados que conservan el texto original, y publica una versión nueva de cada taller afectado:
+
+```bash
+node --env-file=.env.cloud.local scripts/apply-question-fixes.mjs --cloud
+node --env-file=.env.cloud.local scripts/apply-question-fixes.mjs --cloud --apply
+```
+
+El primer comando solo muestra lo que cambiaría. Sin `--cloud` actúa sobre `.private/catalog.json`.
+
+Al crear preguntas de ordenar, comprueba que solo un orden sea correcto. Si dos líneas no dependen entre sí, indica en el enunciado la salida esperada o cuál va primero.
