@@ -263,3 +263,16 @@ node --env-file=.env.cloud.local scripts/apply-question-fixes.mjs --cloud --appl
 El primer comando solo muestra lo que cambiaría. Sin `--cloud` actúa sobre `.private/catalog.json`.
 
 Al crear preguntas de ordenar, comprueba que solo un orden sea correcto. Si dos líneas no dependen entre sí, indica en el enunciado la salida esperada o cuál va primero.
+
+## Historial personal, estadísticas por pregunta y fechas de evaluación
+
+- **Mi historial (aspirante):** en la navegación del aspirante, **Mi historial** muestra tres cosas:
+  - las evaluaciones, con nota sobre 20, aciertos y posición confirmados por el servidor, y un botón para continuar una evaluación sin terminar;
+  - las partidas en vivo, con puesto, puntos y nota por aciertos;
+  - las prácticas.
+
+  Funciona **por dispositivo**: el navegador guarda los tokens de sus propios intentos y `POST /api/eval/history` solo responde por esos tokens. No se busca por código universitario, para que nadie vea las notas de otra persona. Se puede borrar desde la misma pantalla; las notas siguen en el servidor.
+- **Estadísticas por pregunta (miembros):** en **Resultados**, al filtrar un cuestionario aparece **¿Qué preguntas se fallan más?** Muestra el porcentaje de aspirantes que respondió mal cada pregunta, por versión, y resalta en rojo las que falla la mitad o más. Usa las evaluaciones individuales terminadas.
+- **Fechas de apertura y cierre:** en **Configuración → Disponibilidad de la evaluación** (hora de Perú, opcional). Fuera de esas fechas nadie puede empezar la evaluación. Quien ya empezó puede terminarla y retomarla. Rige al guardar el borrador, sin publicar otra versión. La tarjeta del cuestionario muestra «Abre …», «Cierra …» o «Evaluación cerrada».
+
+Archivos: `src/MyHistory.tsx`, `src/my-history.mjs`, `src/question-stats.mjs` y los cambios en `server/evaluation.mjs`, `src/Teacher.tsx` y `src/QuizStudio.tsx`. Pruebas: `tests/aspirant-tools.test.mjs`. No requiere migraciones nuevas.

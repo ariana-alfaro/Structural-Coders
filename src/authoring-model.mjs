@@ -4,6 +4,7 @@ export function validateQuiz(quiz){
  if(!quiz.course.trim()||!quiz.cycle.trim())issues.push('Completa el curso y el ciclo.');
  if(!/^[A-Z0-9]{6}$/.test(quiz.code))issues.push('El código debe tener seis letras o números.');
  if(!quiz.questions.length)issues.push('Agrega al menos una pregunta.');
+ if(quiz.opensAt&&quiz.closesAt&&Date.parse(quiz.closesAt)<=Date.parse(quiz.opensAt))issues.push('La fecha de cierre debe ser posterior a la de apertura.');
  if(quiz.questions.length>100)issues.push('El máximo es 100 preguntas por cuestionario.');
  quiz.questions.forEach((q,i)=>{
   const at=`Pregunta ${i+1}: `;

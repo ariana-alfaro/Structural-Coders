@@ -6,7 +6,7 @@ import {normalizeGame,type GameSettings} from './practice-model.mjs';
 
 export type AuthoredQuestion=Question&{solution:number|number[]|string;explanation:string;points:number};
 
-export type QuizDraft={id:string;title:string;description:string;course:string;cycle:string;code:string;hints:boolean;practice:boolean;game?:GameSettings;questions:AuthoredQuestion[];updatedAt:string;owner?:string;visibility?:'private'|'group'};
+export type QuizDraft={id:string;title:string;description:string;course:string;cycle:string;code:string;hints:boolean;practice:boolean;game?:GameSettings;opensAt?:string;closesAt?:string;questions:AuthoredQuestion[];updatedAt:string;owner?:string;visibility?:'private'|'group'};
 
 export type QuizSnapshot=QuizDraft&{revision:number;publishedAt:string};
 

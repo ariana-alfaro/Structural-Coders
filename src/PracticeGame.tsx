@@ -5,6 +5,7 @@ import {Zap,Scissors,Snowflake,Shield,Flame,Trophy,Timer,Check,X,ArrowRight,Rota
 import type {QuizSnapshot} from './authoring';
 import {createRun,usable,usePowerup,answerQuestion,advanceRun,rankAt,leaderboard,recordOf,powerupInfo,type Run,type RoundResult,type Powerup,type PracticeRecord,type Value} from './practice-model.mjs';
 import {Code} from './Code';
+import {rememberPractice} from './my-history.mjs';
 import {SortCode,ConsoleAnswer} from './QuestionControls';
 import {Shape} from './LiveParts';
 import './live.css';
@@ -28,7 +29,7 @@ export function PracticeGame({quiz,nick:initialNick,onExit}:{quiz:QuizSnapshot;n
  function start(){const r={...createRun(quiz,nick.trim()),avatar:rememberAvatar(avatar)};setRun(r);openQuestion(r)}
  function submit(value:Value|null){if(!run||!q||phase!=='question')return;const out=answerQuestion(run,q,value,elapsed);setRun(out.run);setResult(out.result);setPhase('feedback')}
  function power(kind:Powerup){if(!run||!q)return;setRun(usePowerup(run,q,kind));if(kind==='congelar')setFrozenAt(Math.max(0,Date.now()-startedAt))}
- function next(){if(!run)return;const r=advanceRun(run,total);setRun(r);if(r.done){setRecords(saveRecord(recordOf(r)));setPhase('final')}else openQuestion(r)}
+ function next(){if(!run)return;const r=advanceRun(run,total);setRun(r);if(r.done){const rec=recordOf(r);setRecords(saveRecord(rec));rememberPractice({quizId:rec.quizId,revision:rec.revision,title:quiz.title,nick:rec.nick,score:rec.score,correct:rec.correct,total,finished:rec.finished});setPhase('final')}else openQuestion(r)}
 
  if(phase==='intro'||!run)return <div className="practicewrap"><section className="practiceintro"><span className="sectionicon"><Gamepad2 size={24}/></span><span className="eyebrow">MODO PRÁCTICA</span><h1>{quiz.title}</h1><p>{total} preguntas para practicar como juego. Puedes repetirlo cuantas veces quieras: <b>no cuenta para tu nota</b>.</p>
   <div className="practicechips"><span><Timer size={15}/> {quiz.game?.timer?`${quiz.game.timer} s por pregunta`:'Sin temporizador'}</span>{quiz.game?.timer&&quiz.game.speed?<span><Zap size={15}/> Puntos por rapidez</span>:null}{quiz.game?.powerups&&<span><Gift size={15}/> Potenciadores</span>}{quiz.game?.leaderboard&&<span><Trophy size={15}/> Ranking entre preguntas</span>}</div>

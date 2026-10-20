@@ -28,3 +28,22 @@ header{height:133px;gap:40px}.brand.brandstack{display:flex;flex-direction:colum
 .livehistorytop{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}.livehistorytop p{margin:0;color:#9eb4cb;font-size:12px}.livehistorytop button{display:inline-flex;align-items:center;gap:6px}
 .livehistorygame{border-top:1px solid #2a3a4f;padding-top:14px;margin-top:14px}.livehistorygame:first-of-type{border-top:0;margin-top:0;padding-top:0}
 .livehistorygame>header{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px}.livehistorygame>header small{display:block;color:#8fa3b8;font-size:12px;margin-top:3px}.livehistorygame .livehistoryactions{margin:0}
+.qstats{border:1px solid #2a3a4f;border-radius:12px;padding:14px 16px;margin:4px 0 18px;background:#121925}
+.qstats>header{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:10px;margin-bottom:10px}.qstats h4{margin:0;font-size:15px}.qstats>header small{display:block;color:#8fa3b8;font-size:12px;margin-top:3px}.qstats select{display:block;margin-top:4px;background:#111623;color:#e9ebf4;border:1px solid #383e53;border-radius:7px;padding:7px;font:inherit;font-size:12px}.qstats>header label{font-size:11px;color:#b3b8cb}
+.qstats ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.qstats li{display:grid;grid-template-columns:26px minmax(0,1.3fr) minmax(80px,1fr) 52px 44px;align-items:center;gap:10px;font-size:13px;padding:6px 8px;border-radius:8px}
+.qstats li.hard{background:#3a1d2433}.qstats li.hard strong{color:#ff9aa8}
+.qstatsnum{font-family:'Space Grotesk';color:#8fa3b8;text-align:right}.qstatstext b{display:block;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.qstatstext small{color:#8590a8;font-size:11px}
+.qstatsbar{height:8px;border-radius:999px;background:#ffffff12;overflow:hidden}.qstatsbar i{display:block;height:100%;background:#6bb8f1;border-radius:999px}.qstats li.hard .qstatsbar i{background:#ff6b7d}
+.qstats strong{text-align:right;font-variant-numeric:tabular-nums}.qstatscount{color:#8590a8;font-size:11px;text-align:right}
+@media(max-width:700px){.qstats li{grid-template-columns:22px 1fr 46px}.qstatsbar,.qstatscount{display:none}}
+.myhistory{max-width:980px;margin:0 auto}.myhistoryhead{display:flex;gap:14px;align-items:flex-start;margin:8px 0 22px}.myhistoryhead h1{font-size:28px}.myhistoryhead p{margin:6px 0 0;color:#9eb4cb;font-size:13px;line-height:1.6}
+.cellnote{display:block;color:#8590a8;font-size:11px;margin-top:2px}
+/* Encabezados internos: no heredan el estilo de la cabecera del sitio */
+.resultsblock>header,.livehistorygame>header,.qstats>header{height:auto;min-height:0;border:0;background:none;padding:0;position:static}
+.resultsblock>header{gap:12px}
+/* Tablas del historial del aspirante, con el mismo estilo que el panel de miembros */
+.myhistory table{width:100%;border-collapse:collapse;text-align:left;white-space:nowrap}
+.myhistory th{font-size:11px;font-weight:500;color:#91adc7;background:#142337;padding:12px 9px}
+.myhistory td{border-bottom:1px solid #2d4359;padding:12px 9px;color:#c4d7e9;font-size:13px}.myhistory td b{color:#a8d8ff;font-weight:600}
+.myhistory td button{display:inline-flex;align-items:center;gap:6px}

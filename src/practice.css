@@ -34,3 +34,4 @@
 .practicegamebtn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:10px;background:#2a1f4a;border:1px solid #6d4fc2;color:#e4d8ff;border-radius:7px;padding:12px;font-size:12px;font-weight:600}.practicegamebtn:hover:not(:disabled){background:#3a2b66}
 @media(max-width:800px){.practiceintro,.practicefinal,.practicefeedback,.practiceq{padding:18px}.practicepowerlist{grid-template-columns:1fr}.practicehud{font-size:13px;gap:6px}.practicehud>span:not(.sc-avatar){padding:6px 10px}}
 @media(prefers-reduced-motion:reduce){.practiceaward{animation:none}.practicetimer i{transition:none}}
+.datewindow{display:flex;flex-wrap:wrap;align-items:flex-end;gap:14px;margin:8px 0 20px}.datewindow label{display:flex;flex-direction:column;gap:6px;font-size:12px;color:#b3b8cb}.datewindow input{background:#111623;color:#e9ebf4;border:1px solid #383e53;border-radius:7px;padding:10px;font:inherit;font-size:13px;color-scheme:dark}

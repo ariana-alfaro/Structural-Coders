@@ -15,12 +15,16 @@ export function publicQuiz(quiz){const {owner,visibility,...rest}=quiz;return {.
 
 // Última versión habilitada con ese código. Las prácticas tipo juego entregan sus soluciones al navegador,
 // así que un cuestionario con práctica activada no se puede usar para evaluar.
-export function evaluationQuiz(data,code,username){
+// Fechas de apertura y cierre: se leen del borrador, así un cambio rige de inmediato sin publicar otra versión.
+const when=iso=>new Date(iso).toLocaleString('es-PE',{timeZone:'America/Lima',dateStyle:'long',timeStyle:'short'});
+export function availability(draft,now=Date.now()){if(draft.opensAt&&now<Date.parse(draft.opensAt))return `La evaluación abre el ${when(draft.opensAt)}`;if(draft.closesAt&&now>=Date.parse(draft.closesAt))return `La evaluación cerró el ${when(draft.closesAt)}`;return null}
+export function evaluationQuiz(data,code,username,now=Date.now()){
  const wanted=String(code??'').trim().toUpperCase();
  const quiz=data.publications.filter(q=>q.code===wanted).sort((a,b)=>a.revision-b.revision).at(-1);
  const draft=data.drafts.find(q=>q.id===quiz?.id);
  if(!quiz||!draft||(data.archivedQuizIds??[]).includes(quiz.id)||(data.deletedQuizIds??[]).includes(quiz.id)||(!sharedQuiz(draft)&&draft.owner!==username))fail(404,'No hay una evaluación habilitada con ese código.');
  if(quiz.game?.enabled)fail(409,'Este código corresponde a una práctica tipo juego, que no registra nota. Pide el código de la evaluación.');
+ const window=availability(draft,now);if(window)fail(403,window);
  return quiz;
 }
 
@@ -28,7 +32,7 @@ export function sessionOf(row,token){return {token,name:row.name,student:row.stu
 
 export function finishedResult(row){
  const correctCount=row.answers.filter(a=>a.correct).length;
- return {name:row.name,student:row.student,score:quizScore(row.quiz,row.answers),elapsed:row.answers.reduce((s,a)=>s+a.elapsed,0),finished:row.finished_at,quizId:row.quiz_id,revision:row.revision,quizTitle:row.quiz.title,course:row.quiz.course,cycle:row.quiz.cycle,correctCount,total:row.quiz.questions.length,marks:row.quiz.questions.map(q=>{const a=row.answers.find(x=>x.id===q.id);return a?a.correct:null})};
+ return {name:row.name,student:row.student,score:quizScore(row.quiz,row.answers),elapsed:row.answers.reduce((s,a)=>s+a.elapsed,0),finished:row.finished_at,quizId:row.quiz_id,revision:row.revision,quizTitle:row.quiz.title,course:row.quiz.course,cycle:row.quiz.cycle,correctCount,total:row.quiz.questions.length,marks:row.quiz.questions.map(q=>{const a=row.answers.find(x=>x.id===q.id);return a?a.correct:null}),questions:row.quiz.questions.map(q=>({id:q.id,title:q.title,topic:q.topic,type:q.type}))};
 }
 export const rankResults=rows=>[...rows].sort((a,b)=>b.score-a.score||a.elapsed-b.elapsed||a.finished.localeCompare(b.finished));
 
@@ -46,7 +50,7 @@ export function createEvaluation(store,{now=()=>Date.now()}={}){
   async join({name,student,code},{ip='desconocida',username}={}){
    if(!text(name,2,80)||!text(student,3,24))fail(400,'Revisa tu nombre (2 a 80 caracteres) y tu código universitario (3 a 24).');
    if(!await store.limit(hash('eval|'+ip),30))fail(429,'Demasiados intentos. Espera quince minutos.');
-   const quiz=evaluationQuiz(await store.loadCatalog(),code,username),key=studentKey(student);
+   const quiz=evaluationQuiz(await store.loadCatalog(),code,username,now()),key=studentKey(student);
    if(await store.findAttempt(quiz.id,quiz.revision,key))fail(409,'Ya existe una participación con ese código universitario. Retómala desde el navegador donde empezaste o pide ayuda al miembro GADEST.');
    const token=randomBytes(32).toString('hex');
    const row={token_hash:hash(token),quiz_id:quiz.id,revision:quiz.revision,student_key:key,name:name.trim(),student:student.trim(),quiz,answers:[],opened_at:null,opened_for:null,learning:emptyLearning,version:0,created_at:new Date(now()).toISOString(),finished_at:null};
@@ -95,6 +99,19 @@ export function createEvaluation(store,{now=()=>Date.now()}={}){
    if(!correct||state.practiced.includes(q.id))return {correct,state};
    const next={...state,practiced:[...state.practiced,q.id]};row=await save(row,{learning:next});return {correct,state:next};
   },
+  // Historial personal: solo intentos cuyos tokens guarda el dispositivo del propio aspirante.
+  async history({tokens}){
+   if(!Array.isArray(tokens)||tokens.length>100)fail(400,'Historial no válido.');
+   const out=[];
+   for(const token of new Set(tokens.filter(t=>typeof t==='string'&&/^[a-f0-9]{64}$/.test(t)))){
+    const row=await store.getAttempt(hash(token));if(!row)continue;
+    const base={token,title:row.quiz.title,course:row.quiz.course,cycle:row.quiz.cycle,name:row.name,total:row.quiz.questions.length,started:row.created_at};
+    if(!row.finished_at){out.push({...base,status:'open',answered:row.answers.length});continue}
+    const ranked=rankResults((await store.finishedAttempts(row.quiz_id,row.revision)).map(finishedResult)),mine=finishedResult(row);
+    out.push({...base,status:'finished',score:mine.score,correctCount:mine.correctCount,finished:mine.finished,position:ranked.findIndex(r=>r.student===mine.student&&r.finished===mine.finished)+1||ranked.length,of:ranked.length});
+   }
+   return out.sort((a,b)=>(b.finished??b.started).localeCompare(a.finished??a.started));
+  },
   // Resultados para miembros: solo de cuestionarios que pueden ver en su biblioteca.
   async memberResults(username){
    const data=await store.loadCatalog();
@@ -104,6 +121,6 @@ export function createEvaluation(store,{now=()=>Date.now()}={}){
  };
 }
 
-const routes={join:'join',recover:'recover',question:'question',submit:'submit',results:'results',learning:'learning',hint:'hint',practice:'practice'};
+const routes={history:'history',join:'join',recover:'recover',question:'question',submit:'submit',results:'results',learning:'learning',hint:'hint',practice:'practice'};
 // Devuelve la acción para /api/eval/<acción> con POST, o null si la ruta no es de evaluación.
 export function evaluationRoute(pathname,method){const m=/^\/api\/eval\/([a-z]+)$/.exec(pathname);return m&&method==='POST'&&routes[m[1]]?routes[m[1]]:null}

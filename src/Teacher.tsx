@@ -9,6 +9,7 @@ import {live,memberResults,type MemberResult} from './service';
 import {Authoring} from './QuizStudio';
 import {catalog} from './authoring';
 import {archivedQuiz} from './member-model.mjs';
+import {questionStats,type QuizStats} from './question-stats.mjs';
 
 type Tab='overview'|'results'|'quizzes'|'live';
 export function Teacher({onStudent}:{onStudent:(code?:string)=>void}){
@@ -47,10 +48,21 @@ export function Teacher({onStudent}:{onStudent:(code?:string)=>void}){
     <section className="resultsblock"><header><span className="sectionicon"><GraduationCap size={18}/></span><div><h3>Evaluaciones individuales</h3><small>{live?'En el modo Supabase heredado, consulta los intentos desde SQL Editor.':'Calificadas y registradas en el servidor. Nota sobre 20.'}</small></div><button className="primary" disabled={!filtered.length} onClick={exportCSV}><Download size={16}/> Descargar CSV</button></header>
     {quizFilter?<CycleExport key={quizFilter} defaultTitle={quizFilter} session={individualSession}/>:rows.length>0&&<p className="teacherempty">Elige un cuestionario en el filtro para agregarlo al Excel del ciclo.</p>}
     {loadError&&<p className="teacherempty" role="alert">{loadError}</p>}
+    {quizFilter?<QuestionStatsPanel stats={questionStats(rows.filter(r=>(r.quizTitle||'Fundamentos de Python')===quizFilter))}/>:rows.length>0&&<p className="teacherempty">Elige un cuestionario en el filtro para ver qué preguntas se fallan más.</p>}
     <div className="tablewrap"><table><thead><tr><th>Posición</th><th>Participante</th><th>Cuestionario</th><th>Aciertos</th><th>Nota</th><th>Tiempo</th></tr></thead><tbody>{filtered.map((r,i)=><tr key={i}><td>#{positionOf(r)}</td><td>{r.name}</td><td>{r.quizTitle||'Fundamentos de Python'}</td><td>{r.correctCount??r.score/2}/{r.total??10}</td><td><b>{r.score}/20</b></td><td>{(r.elapsed/1000).toFixed(1)} s</td></tr>)}</tbody></table>{!filtered.length&&<p className="teacherempty">{query||quizFilter?'No hay resultados que coincidan con estos filtros.':'Todavía no hay evaluaciones individuales finalizadas.'}</p>}</div></section>
     <button className="secondary resultsback" onClick={()=>navigate('quizzes')}><ArrowLeft size={16}/> Volver a mis cuestionarios</button>
    </section>}
   </section></PanelBoundary>
   {notice&&<div className="teachernotice" role="status">{notice}<button onClick={()=>setNotice('')}>Cerrar</button></div>}
  </div>;
+}
+
+// Porcentaje de fallos por pregunta en la versión más reciente con intentos; las de 50 % o más se resaltan.
+function QuestionStatsPanel({stats}:{stats:QuizStats[]}){
+ const [index,setIndex]=useState(0),g=stats[Math.min(index,stats.length-1)];
+ if(!g)return <p className="teacherempty">Aún no hay evaluaciones terminadas de este cuestionario para calcular estadísticas.</p>;
+ const hardest=[...g.questions].filter(q=>q.failRate!==null).sort((a,b)=>(b.failRate??0)-(a.failRate??0))[0];
+ return <section className="qstats"><header><div><h4>¿Qué preguntas se fallan más?</h4><small>{g.attempts} {g.attempts===1?'evaluación terminada':'evaluaciones terminadas'} · versión {g.revision}{hardest?.failRate?` · más difícil: n.º ${hardest.position} (${hardest.failRate} % falla)`:''}</small></div>{stats.length>1&&<label>Versión<select value={index} onChange={e=>setIndex(Number(e.target.value))}>{stats.map((x,i)=><option key={x.revision} value={i}>Versión {x.revision} · {x.attempts} intento{x.attempts===1?'':'s'}</option>)}</select></label>}</header>
+  <ol>{g.questions.map(q=><li key={q.id} className={q.failRate!==null&&q.failRate>=50?'hard':''}><span className="qstatsnum">{q.position}</span><div className="qstatstext"><b>{q.title||'Pregunta '+q.position}</b><small>{q.topic}</small></div><div className="qstatsbar" role="img" aria-label={q.failRate===null?'Sin respuestas':`${q.failRate} % falla`}><i style={{width:`${q.failRate??0}%`}}/></div><strong>{q.failRate===null?'—':`${q.failRate} %`}</strong><small className="qstatscount">{q.wrong}/{q.answered}</small></li>)}</ol>
+  <p className="gamesettingsnote">Porcentaje de aspirantes que respondieron mal cada pregunta. En rojo, las que falla la mitad o más: buenas candidatas para reforzar en el taller.</p></section>;
 }
