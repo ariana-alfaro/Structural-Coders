@@ -99,19 +99,6 @@ export function createEvaluation(store,{now=()=>Date.now()}={}){
    if(!correct||state.practiced.includes(q.id))return {correct,state};
    const next={...state,practiced:[...state.practiced,q.id]};row=await save(row,{learning:next});return {correct,state:next};
   },
-  // Historial personal: solo intentos cuyos tokens guarda el dispositivo del propio aspirante.
-  async history({tokens}){
-   if(!Array.isArray(tokens)||tokens.length>100)fail(400,'Historial no válido.');
-   const out=[];
-   for(const token of new Set(tokens.filter(t=>typeof t==='string'&&/^[a-f0-9]{64}$/.test(t)))){
-    const row=await store.getAttempt(hash(token));if(!row)continue;
-    const base={token,title:row.quiz.title,course:row.quiz.course,cycle:row.quiz.cycle,name:row.name,total:row.quiz.questions.length,started:row.created_at};
-    if(!row.finished_at){out.push({...base,status:'open',answered:row.answers.length});continue}
-    const ranked=rankResults((await store.finishedAttempts(row.quiz_id,row.revision)).map(finishedResult)),mine=finishedResult(row);
-    out.push({...base,status:'finished',score:mine.score,correctCount:mine.correctCount,finished:mine.finished,position:ranked.findIndex(r=>r.student===mine.student&&r.finished===mine.finished)+1||ranked.length,of:ranked.length});
-   }
-   return out.sort((a,b)=>(b.finished??b.started).localeCompare(a.finished??a.started));
-  },
   // Resultados para miembros: solo de cuestionarios que pueden ver en su biblioteca.
   async memberResults(username){
    const data=await store.loadCatalog();
@@ -121,6 +108,6 @@ export function createEvaluation(store,{now=()=>Date.now()}={}){
  };
 }
 
-const routes={history:'history',join:'join',recover:'recover',question:'question',submit:'submit',results:'results',learning:'learning',hint:'hint',practice:'practice'};
+const routes={join:'join',recover:'recover',question:'question',submit:'submit',results:'results',learning:'learning',hint:'hint',practice:'practice'};
 // Devuelve la acción para /api/eval/<acción> con POST, o null si la ruta no es de evaluación.
 export function evaluationRoute(pathname,method){const m=/^\/api\/eval\/([a-z]+)$/.exec(pathname);return m&&method==='POST'&&routes[m[1]]?routes[m[1]]:null}

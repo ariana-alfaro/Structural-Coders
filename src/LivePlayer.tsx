@@ -6,7 +6,6 @@ import type {Snapshot,Value} from './live-model.mjs';
 import {openChannel,playerKeys,sharedKey,seal,verify,sameKey,type Channel,type Wire} from './live-net';
 import {cloud} from './service';
 import {Code} from './Code';
-import {rememberLive} from './my-history.mjs';
 import {SortCode,ConsoleAnswer} from './QuestionControls';
 import {Shape,LiveCountdown} from './LiveParts';
 import './live.css';
@@ -27,7 +26,6 @@ export function LivePlayer({onExit}:{onExit:()=>void}){
  useEffect(()=>()=>channel.current?.close(),[]);
  useEffect(()=>{if(stored&&(!pinFromHash()||pinFromHash()===stored.pin))void connect(stored.pin,stored.nick,stored.universityCode??'',normalizeAvatar(stored.avatar??preferredAvatar()))},[]);
  useEffect(()=>{const onHash=()=>{const next=pinFromHash();if(next&&next!==me.current?.pin){leave();setPin(next)}};addEventListener('hashchange',onHash);return()=>removeEventListener('hashchange',onHash)},[]);
- useEffect(()=>{const self=me.current;if(snap?.phase!=='podium'||!self)return;const i=snap.players.findIndex(p=>p.id===self.id);if(i<0)return;const p=snap.players[i];rememberLive({key:`${snap.pin}-${self.id}`,title:snap.title,finished:new Date().toISOString(),score:p.score,correct:p.correct,total:snap.total,position:i+1,of:snap.players.length})},[snap?.phase]);
  useEffect(()=>{if(snap?.phase!=='question')return;const t=setInterval(()=>setNow(Date.now()),250);return()=>clearInterval(t)},[snap?.phase,snap?.index]);
  useEffect(()=>{if(snap?.question?.type==='order')setOrder(snap.question.options.map((_,i)=>i));setSelected(null);setOutput('')},[snap?.index]);
 
